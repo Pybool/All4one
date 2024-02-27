@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <%- include('../partials/head'); %>
+  <body>
+    <!-- preloader-start -->
+    <div id="preloader">
+      <div id="loading-center">
+        <div id="loading-center-absolute">
+          <div class="object" id="object_one"></div>
+          <div class="object" id="object_two"></div>
+          <div class="object" id="object_three"></div>
+          <div class="object" id="object_four"></div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader-end -->
+
+    <!-- header-area -->
+    <%- include('../partials/header'); %>
+    <!-- header-area-end -->
+
+    <!-- main-area -->
+    <main>
+        <%- include('../partials/cookiesperm'); %>
+      <!-- breadcrumb-area -->
+      <section class="breadcrumb-area">
+        <div
+          class="breadcrumb-bg"
+                data-background="assets/img/images/royaltyfree/doctor-taking-care-senior-woman-home_23-2148962376.png"
+
+        ></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="breadcrumb-content">
+                <h2 class="title">volunteers</h2>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="index-2.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      team
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- breadcrumb-area-end -->
+
+      <!-- team-area -->
+      <section class="team-area pt-120 pb-90">
+        <div class="container">
+          <div class="row justify-content-center">
+            <% team.forEach(function(member) { %>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="team-box text-center mb-30">
+                      <div class="team-thumb position-relative">
+                        <a href="/team-details?id=<%= member.id %>"
+                          ><img src="<%= member.imageUrl %>" alt=""
+                        /></a>
+                      </div>
+                      <div class="team-content">
+                        <span><%= member.position %></span>
+                        <h4><a href="/team-details?id=<%= member.id %>"><%= member.name %></a></h4>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+            
+          </div>
+        </div>
+      </section>
+      <!-- team-area-end -->
+
+      <!-- cta-area -->
+      <section class="cat-area inner-cta-area">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-7 col-md-10">
+              <div class="cta-inner-wrap text-center">
+                <div class="cta-icon">
+                    
+                  <img src="/assets/img/imageIcons/horizonatal.png" alt="" />
+                </div>
+                <div class="section-title text-center mb-10">
+                  <!-- <h6 class="sub-title"> years of experience</h6> -->
+                  <h2 class="title">get any kind answers here right now.</h2>
+                </div>
+                <div class="inner-cta-btn">
+                  <a href="/appointment" class="btn"
+                    >get appointment<i class="fal fa-calendar-alt"></i
+                  ></a>
+                  <a href="#" class="btn white-btn"
+                    >learn more<i class="fal fa-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cta-rotate-img cri-one">
+          <img src="/assets/img/images/cta_rotate_img01.png" alt="" />
+        </div>
+        <div class="cta-rotate-img cri-two">
+          <img src="/assets/img/images/cta_rotate_img02.png" alt="" />
+        </div>
+        <div class="cta-rotate-img cri-three">
+          <img src="/assets/img/images/cta_rotate_img03.png" alt="" />
+        </div>
+      </section>
+      <!-- cta-area-end -->
+
+      <!-- blog-area -->
+      <section class="blog-area pt-120 pb-70">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="section-title text-center mb-70">
+                <h6 class="sub-title">blog</h6>
+                <h2 class="title">news feeds</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container custom-container">
+          <div class="row blog-active">
+            <div class="col-lg-6">
+              <div class="blog-post-item bp-style-one mb-50">
+                <div class="blog-post-thumb">
+                  <a href="blog-details.html">
+                    <img src="/assets/img/blog/blog_thumb01.jpg" alt="" />
+                    <div class="overlay-post-date">23 <span>jan</span></div>
+                  </a>
+                </div>
+                <div class="blog-post-content">
+                  <div class="blog-post-tag">
+                    <a href="#">senior,</a>
+                    <a href="#">care,</a>
+                    <a href="#">health</a>
+                  </div>
+                  <h2>
+                    <a href="blog-details.html"
+                      >Lorem ipsum dolor sit am et, consectetur</a
+                    >
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna.
+                  </p>
+                  <div class="blog-post-avatar">
+                    <div class="thumb">
+                      <img src="/assets/img/blog/blog_post_avatar.jpg" alt="" />
+                    </div>
+                    <div class="info">
+                      <h6>Posted By <a href="#">Will smith</a></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="blog-post-item bp-style-one mb-50">
+                <div class="blog-post-thumb">
+                  <a href="blog-details.html">
+                    <img src="/assets/img/blog/blog_thumb02.jpg" alt="" />
+                    <div class="overlay-post-date">20 <span>jan</span></div>
+                  </a>
+                </div>
+                <div class="blog-post-content">
+                  <div class="blog-post-tag">
+                    <a href="#">senior,</a>
+                    <a href="#">care,</a>
+                    <a href="#">health</a>
+                  </div>
+                  <h2>
+                    <a href="blog-details.html"
+                      >Lorem ipsum dolor sit am et, consectetur</a
+                    >
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna.
+                  </p>
+                  <div class="blog-post-avatar">
+                    <div class="thumb">
+                      <img src="/assets/img/blog/blog_post_avatar.jpg" alt="" />
+                    </div>
+                    <div class="info">
+                      <h6>Posted By <a href="#">Will smith</a></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="blog-post-item bp-style-one mb-50">
+                <div class="blog-post-thumb">
+                  <a href="blog-details.html">
+                    <img src="/assets/img/blog/blog_thumb03.jpg" alt="" />
+                    <div class="overlay-post-date">18 <span>jan</span></div>
+                  </a>
+                </div>
+                <div class="blog-post-content">
+                  <div class="blog-post-tag">
+                    <a href="#">senior,</a>
+                    <a href="#">care,</a>
+                    <a href="#">health</a>
+                  </div>
+                  <h2>
+                    <a href="blog-details.html"
+                      >Lorem ipsum dolor sit am et, consectetur</a
+                    >
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna.
+                  </p>
+                  <div class="blog-post-avatar">
+                    <div class="thumb">
+                      <img src="/assets/img/blog/blog_post_avatar.jpg" alt="" />
+                    </div>
+                    <div class="info">
+                      <h6>Posted By <a href="#">Will smith</a></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- blog-area-end -->
+    </main>
+    <!-- main-area-emd -->
+
+    <!-- footer-area -->
+    <%- include('../partials/footer'); %>
+    <!-- footer-area-end -->
+    <!-- JS here -->
+    <%- include('../partials/scripts'); %>
+  </body>
+
+</html>

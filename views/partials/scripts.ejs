@@ -1,0 +1,157 @@
+<script src="/assets/js/vendor/jquery-3.5.0.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/isotope.pkgd.min.js"></script>
+<script src="/assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.odometer.min.js"></script>
+<script src="/assets/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/js/jquery.appear.js"></script>
+<script src="/assets/js/js_jquery.knob.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+<script src="/assets/js/ajax-form.js"></script>
+<script src="/assets/js/wow.min.js"></script>
+<script src="/assets/js/aos.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/app/applicant.js"></script>
+
+<script>
+  try{
+    document
+    .getElementById("newsletterForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+    });
+
+  function subscribeNewsletter(id) {
+    const emailInput = document.getElementById(id);
+    // if (emailInput) {
+    if (emailInput.value.trim() == "") {
+      return alert("Please enter a valid email address");
+    }
+    // }
+
+    Swal.fire({
+      type: "success",
+      title: "Newsletter Subscription!",
+      text: "Congrats, Newletter subscription was sucessfull",
+      timer: 1500,
+    });
+  }
+  }
+  catch{}
+</script>
+
+<script>
+ try{
+    if (localStorage.getItem("cookieSeen") != "shown") {
+    $(".cookie-banner").delay(4000).fadeIn();
+    $('body').css('overflow', 'hidden');
+    localStorage.setItem("cookieSeen", "shown");
+  }
+
+  $(".accept").click(function (e) {
+    $(".cookie-banner").fadeOut();
+    $('body').css('overflow', 'auto');
+  });
+ }catch{}
+</script>
+
+<script>
+  // index.ejs
+  try{
+    document
+    .getElementById("getInTouchForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+    });
+  }catch{}
+
+  function validateGetInTouchForm() {
+    var name = document.getElementById("getintouch-name")?.value || "";
+    var email = document.getElementById("getintouch-email")?.value || "";
+    var reason = document.getElementById("getintouch-reason")?.value || "";
+    var message = document.getElementById("getintouch-message")?.value || "";
+
+    console.log(name, email, message);
+
+    // Validate name
+    if (name.trim() === "") {
+      alert("Please enter your name.");
+      return false;
+    }
+
+    if (reason.trim() === "") {
+      alert("Please select a reason");
+      return false;
+    }
+
+    // Validate email
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailPattern)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+
+    // Validate message length
+    var messageWords = message.trim().split(/\s+/).length;
+    console.log(messageWords);
+    if (messageWords < 10) {
+      alert("Please enter a message with at least 10 words.");
+      return false;
+    }
+
+    // Form is valid
+    return {
+      name,
+      email,
+      reason,
+      message,
+    };
+  }
+
+  const getInTouch = async () => {
+    const result = validateGetInTouchForm()
+    if (result != false) {
+      const url = "/api/v1/contact-us"; // Replace this with your API endpoint URL
+    
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(result),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to send data.");
+        }
+
+        const responseData = await response.json();
+        console.log(responseData);
+        if(responseData?.status){
+           return Swal.fire({
+            type: "success",
+            title: "Getting in touch",
+            text: "Thank you for getting in touch with us.",
+            timer: 2000,
+            }).then(() => {
+            // Navigate to the new page
+            window.location.href = '/';
+            });
+
+        }
+        alert("We could not receive your message at this time")
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+
+  $("#getintouch-submit").click(function (e) {
+    getInTouch();
+  });
+</script>

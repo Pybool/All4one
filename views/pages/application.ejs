@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <!-- Mirrored from ifingerstudio.com/templates/wellpress-html/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Feb 2024 10:24:10 GMT -->
+  <%- include('../partials/head'); %>
+  <body>
+    <!-- preloader-start -->
+    <div id="preloader">
+      <div id="loading-center">
+        <div id="loading-center-absolute">
+          <div class="object" id="object_one"></div>
+          <div class="object" id="object_two"></div>
+          <div class="object" id="object_three"></div>
+          <div class="object" id="object_four"></div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader-end -->
+
+    <!-- header-area -->
+    <%- include('../partials/header'); %>
+    <!-- header-area-end -->
+
+    <!-- main-area -->
+    <main>
+      <%- include('../partials/cookiesperm'); %>
+      <!-- breadcrumb-area -->
+      <section class="breadcrumb-area">
+        <div
+          class="breadcrumb-bg"
+          data-background="assets/img/images/royaltyfree/doctor-taking-care-senior-woman-home_23-2148962376.png"
+        ></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="breadcrumb-content">
+                <h2 class="title">Application</h2>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="index-2.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      application
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- breadcrumb-area-end -->
+
+      <!-- contact-area -->
+      <div class="contact-area pt-120">
+        <div class="container">
+          <h6>
+            If you would like to apply for a position at Allforone care
+            services, please fill in and submit the form below. You will be
+            asked to bring relevant documentation along with you to your
+            interview.
+          </h6>
+          <div style="gap:0px" class="col-md-12 pb-35 flex-row-end">
+            <div class="col-md-6">
+              <small class="text-left" style="color: orange"
+                >For returning applicants only</small
+              >
+              <div class="">
+                <input
+                  style="border-left: none; border-right: none;border-top: none;width: 90%;margin-bottom: 20px;"
+                  type="text"
+                  name="applicantId"
+                  id="applicantIdInput"
+                  placeholder="Enter Application ID or Email"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-grp">
+                 
+                <button style="width: 90%" class="btn btn-primary returnApplicantBtn">
+                  I am a returning applicant
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="contact-form-wrap">
+                <form id="applicationForm" action="/api/v1/submit-application" method="POST">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="firstName"
+                          placeholder="Enter first name"
+                        />
+                        <i class="fal fa-user"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="lastName"
+                          placeholder="Enter last name"
+                        />
+                        <i class="fal fa-user"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-grp">
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Enter your email"
+                        />
+                        <i class="fal fa-envelope"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="phone"
+                          placeholder="Phone Number"
+                        />
+                        <i class="fal fa-phone"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="homeTelephone"
+                          placeholder="Home Telephone"
+                        />
+                        <i class="fal fa-phone"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="nin"
+                          placeholder="National Insurance Number"
+                        />
+                        <i class="fal fa-user"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="address"
+                          placeholder="Address"
+                        />
+                        <i class="fal fa-location"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-grp">
+                        <input
+                          type="text"
+                          name="permanentAddress"
+                          placeholder="Permanent Address (If different)"
+                        />
+                        <i class="fal fa-location"></i>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        For compliance of the Working Time Directive, we would
+                        appreciate it if you could indicate which age bracket
+                        you fall into:
+                      </p>
+                      <div class="form-grp">
+                        <input
+                          type="date"
+                          name="dob"
+                          placeholder="Date of Birth"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-grp text-left">
+                        <button
+                          class="btn btn-primary saveProgress"
+                          type="submit"
+                        >
+                          Save Progress
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <hr />
+
+                      <p class="text-left">
+                        Eligibility to work in the UK & Ireland: You must bring
+                        the original documentation if invited to an interview as
+                        evidence of your entitlement to work in this country.
+                        Failure to do so will invalidate your application.<br /><br />
+
+                        Please confirm which of the following you have:
+                      </p>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-grp text-left">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="british_passport"
+                                  class="checkbox"
+                                />British Passport or UK birth certificate &amp;
+                                letter</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="passport_showing_right_to_live"
+                                  class="checkbox"
+                                />Passport showing right to live &amp; work in
+                                the UK</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="non_eu_passport"
+                                  class="checkbox"
+                                />Non-European passport with relevant work
+                                visa</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="certificate_of_registration"
+                                  class="checkbox"
+                                />Certificate of registration / naturalisation
+                                as a British Citizen</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="eec_passport"
+                                  class="checkbox"
+                                />EEC passport or identity card plus required
+                                work registration letter</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="other_doc"
+                                  class="checkbox"
+                                />Any other document that supports your
+                                eligibility to work in the UK</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        Do you hold a full valid UK driving licence?
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="ukdrivingLicence"
+                                  class="checkbox"
+                                />Yes I do</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="ukdrivingLicence"
+                                  class="checkbox"
+                                />No i don't</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        Do you a vehicle for work purposes?
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="hasWorkVehicle"
+                                  class="checkbox"
+                                />Yes I do</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="hasWorkVehicle"
+                                  class="checkbox"
+                                />No i don't</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        Please provide details of any driving endorsements on
+                        your license
+                      </p>
+                      <div class="form-grp">
+                        <textarea
+                          style="min-height: auto"
+                          name="message"
+                          id="message"
+                          placeholder="Enter endorsement details"
+                        ></textarea>
+                        <i class="fal fa-pencil"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        Do you have any Holidays booked? (please give details)
+                      </p>
+                      <div class="form-grp">
+                        <input type="text" name="bookedHolidays" />
+                        <i class="fal fa-location"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="text-left">
+                        How many hours are you looking to work?
+                      </p>
+                      <div class="form-grp">
+                        <input type="text" name="workHours" />
+                        <i class="fal fa-user"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="text-left">Where would you like to work</p>
+                      <div class="form-grp">
+                        <select name="likeToWorkLocation" class="select">
+                          <option>Warsaw</option>
+                          <option>London</option>
+                          <option>Middlesbrough</option>
+                          <option>Yorkshire</option>
+                        </select>
+                        <i class="fal fa-user"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="text-left">
+                        Where did you hear about this vacancy?
+                      </p>
+                      <div class="form-grp">
+                        <select id="heardVacancy" class="select">
+                          <option><i class="fal fa-twitter"></i>Twitter</option>
+                          <option>Facebook</option>
+                          <option>Instagram</option>
+                          <option>Whatsapp</option>
+                          <option>Other</option>
+                        </select>
+                        <i class="fal fa-twitter"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <small class="text-left">
+                        By completing the below you confirm you have sought
+                        permission to use the individuals name; If you were
+                        recommended by a friend please confirm their full name:
+                      </small>
+                      <div class="form-grp">
+                        <input type="text" name="recommendedBy" />
+                        <i class="fal fa-user"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-grp text-left">
+                        <button class="btn tn-primary" type="button">
+                          Save Progress
+                        </button>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="col-12">
+                      <hr />
+
+                      <p class="text-left">
+                        The Really Important bit…… Working in health and social
+                        care means we need to pass enhanced checks. Because of
+                        this you are required to disclose all spent and unspent
+                        convictions, cautions, reprimands and warnings under the
+                        Rehabilitation of Offenders Act 1974 exemption. Please
+                        be aware that some convictions although spent may still
+                        appear on your DBS/PVG check. Please answer this section
+                        honestly if you are in any doubt whatsoever about making
+                        a declaration then please discuss with the Agency
+                        manager. You are required under the Act to inform us if
+                        you are convicted of a criminal offence, cautioned or
+                        have a hearing pending in the future. A conviction does
+                        not automatically prevent you from working for us,
+                        however failure to declare or providing inaccurate
+                        information will be taken into consideration when
+                        reviewing your disclosure. If you are successful in your
+                        application you have a responsibility to update your
+                        disclosure status. We actively promote equality of
+                        opportunity for all, as stated in our Equal Opportunity
+                        policy which is available upon request.
+                      </p>
+                    </div>
+
+                    <div class="col-md-12">
+                      <hr />
+                      <p class="text-left">
+                        Are you aware of any recent/outstanding
+                        allegations/investigations that have been made against
+                        you that relate to any safeguarding issue/referrals
+                        including any referrals to the Nursing Medical Council,
+                        Disclosure & Barring Service (DBS) or Protection of
+                        Vulnerable Groups Scheme (PVG)?
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="outstandingAllegations"
+                                  class="checkbox"
+                                />Yes I am aware</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="outstandingAllegations"
+                                  class="checkbox"
+                                />No i am not aware</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <hr />
+                      <p class="text-left">
+                        Do you have any spent or unspent convictions, cautions,
+                        reprimands or warnings?
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="unspentConvictions"
+                                  class="checkbox"
+                                />Yes I do</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="unspentConvictions"
+                                  class="checkbox"
+                                />No i do not</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <hr />
+                      <p class="text-left">
+                        Do you have any pending or unresolved disciplinary
+                        action taken against you, either in employment or care
+                        related activity?
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="pendingDisciplinaryAction"
+                                  class="checkbox"
+                                />Yes I do</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="pendingDisciplinaryAction"
+                                  class="checkbox"
+                                />No i do not</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        If you have answered YES to any of the last 3 above,
+                        please provide details:
+                      </p>
+                      <div class="form-grp">
+                        <textarea
+                          style="min-height: auto"
+                          name="crimeHistoryDetails"
+                          id="message"
+                          placeholder="Enter details"
+                        ></textarea>
+                        <i class="fal fa-pencil"></i>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <hr />
+                      <h6>DBS - England & Wales only</h6>
+                      <p class="text-left">
+                        <br /><br />
+                        I confirm that to the best of my knowledge i have not
+                        been placed on a barred list for the workforce i am
+                        applying to work with. I also give permission for a copy
+                        of the disclosure to which i am subject being made
+                        available upon written request to be named authorised
+                        person who acts on behalf of the national local
+                        government and NHS for auditing purposes.
+
+                        <br /><br />Please Tick to confirm<br /><br />
+                        I undersigned declare that :
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="col-12">
+                          <div class="col-md-12">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="workHoursConsent"
+                                  class="checkbox"
+                                />The particulars i have provided are full and
+                                accurate and that any supporting documents which
+                                i have provided are genuine and relate to
+                                me.</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="dbsAuthorizedApplication"
+                                  class="checkbox"
+                                />I have given consent for the authorised person
+                                to apply DBS application on my behalf.</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="dbsReadPrivacyPolicy"
+                                  class="checkbox"
+                                />I have read the Standard/Enhanced Check
+                                Privacy Policy for applicants and i understand
+                                how the DBS will process my personal data and
+                                the options available to me for submitting an
+                                application.</label
+                              >
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="checkbox"
+                                  name="dbsConsentElectronicResult"
+                                  class="checkbox"
+                                />I consent to the DBS providing an electronic
+                                result directly to the registered body that has
+                                submitted my application. I understand that an
+                                electronic result contains a message that
+                                indicated either the certificate is blank or to
+                                await certificate which will indicate that my
+                                certificate contains information in some cases
+                                the registered body may provide this information
+                                directly to my employer prior to me receiving my
+                                certificate.</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <hr />
+                      <h6>Working Time Regulations (all)</h6>
+                      <p class="text-left">
+                        The European Union has regulations in place for all
+                        workers, governing the number of hours during the
+                        working week that is safe to work. The current limit is
+                        48 hours per week. We would never compel you to work
+                        more than 48 hours per week but you may choose to do so.
+                      </p>
+                      <div class="form-grp text-left">
+                        <div class="col-12">
+                          <div class="col-md-12">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="workHoursConsent"
+                                  class="checkbox"
+                                />I DO NOT wish to work more than 48 hours per
+                                week</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="">
+                              <label
+                                ><input
+                                  type="radio"
+                                  name="workHoursConsent"
+                                  class="checkbox"
+                                />I DO wish to work more than 48 hiurs per
+                                week</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                      <h6>Education</h6>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="school1"
+                              placeholder="(1) Name & address of school or college"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="school1Qualification"
+                              placeholder="(1) Qualification Achieved"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="school2"
+                              placeholder="(2) Name & address of school or college"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="school2Qualification"
+                              placeholder="(2) Qualification Achieved"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                    <div class="col-md-12"><h6>Previous Employments</h6></div>
+                    <div class="col-md-12">
+                      <p class="text-left"><b>Workplace 1</b></p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workplace1EmployerName"
+                              placeholder="Enter employer name"
+                            />
+                            <i class="fal fa-user"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace1Position"
+                              placeholder="Enter your position"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace1RateOfPay"
+                              placeholder="Enter your rate of pay"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="date"
+                              name="workPlace1DateOfEmployment"
+                              placeholder="Select your employment date"
+                            />
+                            <i class="fal fa-date"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workPlace1Duties"
+                              id="workPlace1Duties"
+                              placeholder="What were your duties?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workPlace1ReasonLeft"
+                              id="workPlace1ReasonLeft"
+                              placeholder="Why did you leave?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace1ManagersName"
+                              placeholder="Enter managers name"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="workPlace1ManagersPhone"
+                              placeholder="Enter managers phone"
+                            />
+                            <i class="fal fa-date"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="email"
+                              name="workPlace1ManagersEmail"
+                              placeholder="Enter manager Email"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left"><b>Workplace 2</b></p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workplace2EmployerName"
+                              placeholder="Enter employer name"
+                            />
+                            <i class="fal fa-user"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace2Position"
+                              placeholder="Enter your position"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace2RateOfPay"
+                              placeholder="Enter your rate of pay"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="date"
+                              name="workPlace2DateOfEmployment"
+                              placeholder="Select your employment date"
+                            />
+                            <i class="fal fa-date"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workPlace2Duties"
+                              id="workPlace2Duties"
+                              placeholder="What were your duties?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workPlace2ReasonLeft"
+                              id="workPlace2ReasonLeft"
+                              placeholder="Why did you leave?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace2ManagersName"
+                              placeholder="Enter managers name"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="workPlace2ManagersPhone"
+                              placeholder="Enter managers phone"
+                            />
+                            <i class="fal fa-date"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="email"
+                              name="workPlace2ManagersEmail"
+                              placeholder="Enter manager Email"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                      <p class="text-left"><b>Workplace 3</b></p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workplace3EmployerName"
+                              placeholder="Enter employer name"
+                            />
+                            <i class="fal fa-user"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace3Position"
+                              placeholder="Enter your position"
+                            />
+                            <i class="fal fa-location"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace3RateOfPay"
+                              placeholder="Enter your rate of pay"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="date"
+                              name="workPlace3DateOfEmployment"
+                              placeholder="Select your employment date"
+                            />
+                            <i class="fal fa-date"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workPlace3Duties"
+                              id="workPlace3Duties"
+                              placeholder="What were your duties?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workPlace3ReasonLeft"
+                              id="workPlace3ReasonLeft"
+                              placeholder="Why did you leave?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="workPlace3ManagersName"
+                              placeholder="Enter managers name"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="workPlace3ManagersPhone"
+                              placeholder="Enter managers phone"
+                            />
+                            <i class="fal fa-date"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="email"
+                              name="workPlace3ManagersEmail"
+                              placeholder="Enter manager Email"
+                            />
+                            <i class="fal fa-envelope"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                      <br />
+                      <p class="text-left">
+                        What’s missing? We're there any gaps between any of the
+                        above jobs listed? If so, how long and why?
+                      </p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="lengthOfGap"
+                              placeholder="Enter length of gap in months"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <select name="workGapBetween" class="select">
+                              <option>Employer 1 & 2</option>
+                              <option>Employer 2 & 3</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="workGapReason"
+                              id="workGapReason"
+                              placeholder="Please provide gap reason"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-grp text-left">
+                        <button class="btn tn-primary" type="button">
+                          Save Progress
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="col-md-12"><h6>Guarantors</h6></div>
+                    <br />
+                    <div class="col-md-12">
+                      <p class="text-left">
+                        Who’ll vouch for you? Please give us the names of 2
+                        people (not related to you), who can be contacted to
+                        provide a reference for you. At least one should be work
+                        related. If this is your first job, please give a tutor
+                        / lecturer’s name.
+                      </p>
+                      <p class="text-left"><b>Person 1</b></p>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="guarantorName"
+                              placeholder="Enter guarantor name"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="guarantorPhone"
+                              placeholder="Enter guarantor phone"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="email"
+                              name="guarantorEmail"
+                              placeholder="Enter guarantor email"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="howDoUKnowGuarantor"
+                              id="howDoUKnowGuarantor"
+                              placeholder="How do you know this person?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-left"><b>Person 2</b></p>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="guarantor2Name"
+                              placeholder="Enter guarantor name"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="guarantor2Phone"
+                              placeholder="Enter guarantor phone"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-grp">
+                            <input
+                              type="email"
+                              name="guarantor2Email"
+                              placeholder="Enter guarantor email"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-grp">
+                            <textarea
+                              style="min-height: auto"
+                              name="howDoUKnowGuarantor2"
+                              id="howDoUKnowGuarantor2"
+                              placeholder="How do you know this person?"
+                            ></textarea>
+                            <i class="fal fa-pencil"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="text-left">Your emergency next of kin</p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="text"
+                              name="nokName"
+                              placeholder="Enter next of kin name"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="nokAddress"
+                              placeholder="Enter next of kin address"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="nokPhone"
+                              placeholder="Enter next of kin phone"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="telephone"
+                              name="nokRelationship"
+                              placeholder="Describe relationship"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <br />
+                      <h6>signatory</h6>
+                      <p class="text-left">
+                        My signature confirms that all the information given on
+                        this application form is true and complete. I understand
+                        that any falsification or deliberate omissions may
+                        disqualify my application or lead to my dismissal. I
+                        confirm that I am entitled to work in the UK & Ireland
+                        and can provide original documentation to confirm this.
+                        I understand that my employment is subject to references
+                        that are satisfactory to Care Deluxe Limited.
+                      </p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input
+                              type="file"
+                              name="signature"
+                              placeholder="Signature"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-grp">
+                            <input type="date" name="signatoryDate" />
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                    <button type="submit" class="btn">
+                      Complete Application
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- contact-area-end -->
+    </main>
+    <!-- main-area-emd -->
+
+    <!-- footer-area -->
+    <%- include('../partials/footer'); %>
+    <!-- footer-area-end -->
+    <!-- JS here -->
+    <%- include('../partials/scripts'); %>
+  </body>
+
+</html>
