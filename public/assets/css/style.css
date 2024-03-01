@@ -1992,7 +1992,7 @@ label {
 }
 .skill-overlay-img > a {
   display: block;
-  width: 100px;
+  width: 200px;
   height: 100px;
   text-align: center;
   line-height: 100px;
@@ -3974,7 +3974,7 @@ label {
 }
 .single-comment .comments-avatar {
   float: left;
-  width: 100px;
+  width: 200px;
   margin-right: 30px;
 }
 .single-comment .comments-avatar img {
@@ -4183,7 +4183,7 @@ label {
 }
 .advice-call-area .free-quote-icon {
   height: 100px;
-  width: 100px;
+  width: 200px;
   line-height: 100px;
   background: #fff;
 }

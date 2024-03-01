@@ -2,6 +2,7 @@ const Message = require("../models/messages.model");
 const Application = require("../models/careers.model");
 const Newsletter = require("../models/newsletter.model");
 const sendMail = require("../services/mailservice");
+const logoUri = require("../datauris/logo");
 const ejs = require("ejs");
 
 const applicationFormMissableFields = [
@@ -43,12 +44,13 @@ const sendMessage = async (req, res) => {
         {
           email,
           name: newMessage?.name,
-          message: newMessage?.message
+          message: newMessage?.message,
+          logoUri: logoUri.logoUri
         }
       );
       const mailOptions = {
         from: "INFO@ALL4ONECARESERVICES.CO.UK".toLowerCase(),
-        to: "info@all4onecareservices.co.uk",
+        to: "ekoemmanueljavl@gmail.com",
         subject: "Contact Us",
         text: `A new contact from All4One ${email} has gotten in touch with you`,
         html: template,
@@ -134,6 +136,7 @@ const submitApplication = async (req, res) => {
         "views/pages/emailtemplates/applicationsuccess_email.ejs",
         {
           emailOrName,
+          logoUri: logoUri.logoUri
         }
       );
       const mailOptions = {
@@ -214,6 +217,7 @@ const subscribeNewsLetter = async (req, res) => {
         "views/pages/emailtemplates/newsletter_email.ejs",
         {
           emailOrName,
+          logoUri: logoUri.logoUri
         }
       );
       const mailOptions = {
