@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (
             currentPageUrl.includes("services-details") &&
-            link.querySelector("a").href.includes("services")
+            link.querySelector("a").href.includes("/services")
           ) {
             link.classList.add("active");
           }

@@ -3,6 +3,7 @@ const Application = require("../models/careers.model");
 const Newsletter = require("../models/newsletter.model");
 const sendMail = require("../services/mailservice");
 const logoUri = require("../datauris/logo");
+const generateUniqueCode = require("./helper").generateUniqueCode;
 const ejs = require("ejs");
 
 const applicationFormMissableFields = [
@@ -78,7 +79,7 @@ const submitApplication = async (req, res) => {
     let applicantId;
     let applicationData = req.body;
     applicantId = req.query.applicantId || null;
-    applicationData.applicantId = applicantId;
+    // applicationData.applicantId = applicantId;
 
     //Change 'on' for boolean fields to true
     Object.keys(applicationData).forEach((key) => {
@@ -119,13 +120,16 @@ const submitApplication = async (req, res) => {
       { $set: applicationData },
       options
     );
-    if (!applicantId) {
-      dbApplication.applicantId = `A41-${dbApplication._id.toString()}`;
+    
+    if (!dbApplication.applicantId) {
+      console.log("\n\n\nNEW ",dbApplication, generateUniqueCode('A41'))
+      dbApplication.applicantId = generateUniqueCode('A41');
       dbApplication = await dbApplication.save();
     }
     if (dbApplication._id) {
       response = {
         status: true,
+        data: dbApplication,
         message: "Application has been updated",
       };
       let emailOrName = dbApplication?.firstName;

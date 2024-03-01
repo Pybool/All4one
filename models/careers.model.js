@@ -28,6 +28,7 @@ const applicationSchema = new mongoose.Schema({
   unspentConvictions: { type: Boolean, default: false , required: false},
   pendingDisciplinaryAction: { type: Boolean, default: false , required: false},
   workHoursConsent: { type: Boolean, default: false , required: false},
+  dbsAccurateDocs:{ type: Boolean, default: false , required: false},
   dbsAuthorizedApplication: { type: Boolean, default: false , required: false},
   dbsReadPrivacyPolicy: { type: Boolean, default: false , required: false},
   dbsConsentElectronicResult: { type: Boolean, default: false , required: false},
