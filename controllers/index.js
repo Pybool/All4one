@@ -2,9 +2,9 @@ const Message = require("../models/messages.model");
 const Application = require("../models/careers.model");
 const Newsletter = require("../models/newsletter.model");
 const sendMail = require("../services/mailservice");
-const logoUri = require("../datauris/logo");
 const generateUniqueCode = require("./helper").generateUniqueCode;
 const ejs = require("ejs");
+const juice = require("juice");
 
 const applicationFormMissableFields = [
   "british_passport",
@@ -46,7 +46,7 @@ const sendMessage = async (req, res) => {
           email,
           name: newMessage?.name,
           message: newMessage?.message,
-          logoUri: logoUri.logoUri
+          
         }
       );
       const mailOptions = {
@@ -54,7 +54,7 @@ const sendMessage = async (req, res) => {
         to: "ekoemmanueljavl@gmail.com",
         subject: "Contact Us",
         text: `A new contact from All4One ${email} has gotten in touch with you`,
-        html: template,
+        html: juice(template),
       };
       sendMail(mailOptions)
         .then((response) => {
@@ -108,7 +108,6 @@ const submitApplication = async (req, res) => {
     }
     const query = { $or: [{ applicantId }, { email: applicationData?.email }] };
     applicationData.signature = "";
-    console.log("File ", req.file, req.files);
     if (req.file) {
       applicationData.signature = `${req.protocol}://${req.get("host")}/${
         req.file.path
@@ -122,7 +121,6 @@ const submitApplication = async (req, res) => {
     );
     
     if (!dbApplication.applicantId) {
-      console.log("\n\n\nNEW ",dbApplication, generateUniqueCode('A41'))
       dbApplication.applicantId = generateUniqueCode('A41');
       dbApplication = await dbApplication.save();
     }
@@ -134,13 +132,13 @@ const submitApplication = async (req, res) => {
       };
       let emailOrName = dbApplication?.firstName;
       if(emailOrName?.trim() == ""){
-        emailOrName = email
+        emailOrName = applicationData?.email
       }
       const template = await ejs.renderFile(
         "views/pages/emailtemplates/applicationsuccess_email.ejs",
         {
           emailOrName,
-          logoUri: logoUri.logoUri
+          
         }
       );
       const mailOptions = {
@@ -148,7 +146,7 @@ const submitApplication = async (req, res) => {
         to: dbApplication.email,
         subject: "All4One career Application Form",
         text: `Application with application id ${dbApplication.applicantId} created or modified`,
-        html: template,
+        html: juice(template),
       };
       sendMail(mailOptions)
         .then((response) => {
@@ -165,6 +163,7 @@ const submitApplication = async (req, res) => {
     }
     res.send(response);
   } catch (error) {
+    console.log(error)
     res.send({
       status: false,
       message: "Something went wrong while submitting application",
@@ -221,7 +220,7 @@ const subscribeNewsLetter = async (req, res) => {
         "views/pages/emailtemplates/newsletter_email.ejs",
         {
           emailOrName,
-          logoUri: logoUri.logoUri
+          
         }
       );
       const mailOptions = {
@@ -229,7 +228,7 @@ const subscribeNewsLetter = async (req, res) => {
         to: subscriber,
         subject: "Newsletter Subscription",
         text: `Thank you for subscribing to our newsletter`,
-        html: template,
+        html: juice(template),
       };
       sendMail(mailOptions)
         .then((response) => {

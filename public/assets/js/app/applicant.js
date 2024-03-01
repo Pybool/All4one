@@ -79,6 +79,25 @@ const applicationFields = [
   "signatoryDate",
 ];
 
+function getQueryParamValue(paramName) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(paramName);
+}
+
+(async function() {
+  const getQueryParamValue = function(paramName) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(paramName);
+  };
+
+  const applicationId = getQueryParamValue('applicationId');
+  if (applicationId !== null && applicationId.trim() !== "") {
+      // Assuming `applicantId` was a typo and should be `applicationId`
+      await getVacancyApplication(applicationId);
+  } 
+})();
+
+
 function getFormValues() {
   var values = {};
   var fieldNames = applicationFields;
@@ -107,11 +126,12 @@ function getFormValues() {
 }
 
 $(".returnApplicantBtn").click(async function (e) {
-  await getVacancyApplication();
+  const applicantId =  document.getElementById("applicantIdInput")?.value;
+  await getVacancyApplication(applicantId);
 });
 
-async function getVacancyApplication() {
-  const applicantId = document.getElementById("applicantIdInput")?.value;
+async function getVacancyApplication(_applicantId) {
+  const applicantId = _applicantId
   if (!applicantId || applicantId.trim() == "") {
     return alert("Invalid application id");
   }
@@ -197,6 +217,7 @@ document
         } else {
           // Handle other cases if needed
           console.log("Error:", data.message);
+          alert(data.message)
         }
       })
       .catch((error) => console.error("Error:", error));
