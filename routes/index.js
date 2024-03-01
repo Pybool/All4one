@@ -59,8 +59,8 @@ router.get("/appointment", (req, res, next) => {
     res.render("pages/appointment", { pageTitle: "Appointment Form", content: "" });
 });
 
-router.get("/application", (req, res, next) => {
-    res.render("pages/application", { pageTitle: "Application Form", content: "" });
+router.get("/careers", (req, res, next) => {
+    res.render("pages/careers", { pageTitle: "Application Form", content: "" });
 });
 
 // router.get("/team", (req, res, next) => {
@@ -76,6 +76,8 @@ router.post("/api/v1/contact-us", indexControllers.sendMessage);
 router.post("/api/v1/submit-application", upload.single('signature'), indexControllers.submitApplication);
 
 router.get("/api/v1/fetch-application", indexControllers.getApplication);
+
+router.post("/api/v1/subscribe-newsletter", indexControllers.subscribeNewsLetter);
 
 
 

@@ -7,7 +7,7 @@
             <div class="footer-logo mb-35">
               <a href="/"
                 ><img
-                  src="https://all4onecareservices.co.uk/assets/images/horizonatal.png"
+                  src="/assets/img/images/horizonatal.png"
                   alt=""
               /></a>
             </div>
@@ -45,18 +45,18 @@
             </div>
             <div class="fw-link">
               <ul>
-                <li><a href="#">home</a></li>
-                <li><a href="#">about us</a></li>
-                <li><a href="#">servoces</a></li>
-                <li><a href="#">news</a></li>
-                <li><a href="#">terms & codtions</a></li>
-                <li><a href="#">contact</a></li>
+                <li><a href="/">home</a></li>
+                <li><a href="/about-us">about us</a></li>
+                <li><a href="/services">services</a></li>
+                <li><a href="javascript:void(0)">news</a></li>
+                <li><a href="javascript:void(0)">terms & conditions</a></li>
+                <li><a href="/contact">contact</a></li>
               </ul>
               <ul>
-                <li><a href="#">privacy policy</a></li>
-                <li><a href="#">terms of use</a></li>
-                <li><a href="#">copyright</a></li>
-                <li><a href="#">careers</a></li>
+                <li><a href="javascript:void(0)">privacy policy</a></li>
+                <li><a href="javascript:void(0)">terms of use</a></li>
+                <li><a href="javascript:void(0)">copyright</a></li>
+                <li><a href="/careers">careers</a></li>
               </ul>
             </div>
           </div>
@@ -131,13 +131,15 @@
         <div class="col-lg-7">
           <div class="copyright-right-wrap">
             <div class="copyright-form">
-              <form action="#">
+              <form id="newsletterForm" action="/api/v1/subscribe-newsletter" method="POST">
                 <input
+                  style="text-transform: lowercase;"
+                  id="newsletterInput"
                   type="email"
                   name="email"
                   placeholder="enter email address"
                 />
-                <button class="btn">Subscribe now</button>
+                <button onclick="subscribeNewsletter()" class="btn">Subscribe now</button>
               </form>
             </div>
             <button class="scroll-top scroll-to-target" data-target="html">
@@ -149,3 +151,4 @@
     </div>
   </div>
 </footer>
+<script src="/assets/js/app/newsletter.js"></script>

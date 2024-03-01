@@ -15,59 +15,31 @@
 <script src="/assets/js/aos.js"></script>
 <script src="/assets/js/plugins.js"></script>
 <script src="/assets/js/main.js"></script>
-<script src="/assets/js/app/applicant.js"></script>
 
 <script>
-  try{
-    document
-    .getElementById("newsletterForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-    });
-
-  function subscribeNewsletter(id) {
-    const emailInput = document.getElementById(id);
-    // if (emailInput) {
-    if (emailInput.value.trim() == "") {
-      return alert("Please enter a valid email address");
-    }
-    // }
-
-    Swal.fire({
-      type: "success",
-      title: "Newsletter Subscription!",
-      text: "Congrats, Newletter subscription was sucessfull",
-      timer: 1500,
-    });
-  }
-  }
-  catch{}
-</script>
-
-<script>
- try{
+  try {
     if (localStorage.getItem("cookieSeen") != "shown") {
-    $(".cookie-banner").delay(4000).fadeIn();
-    $('body').css('overflow', 'hidden');
-    localStorage.setItem("cookieSeen", "shown");
-  }
+      $(".cookie-banner").delay(4000).fadeIn();
+      $("body").css("overflow", "hidden");
+      localStorage.setItem("cookieSeen", "shown");
+    }
 
-  $(".accept").click(function (e) {
-    $(".cookie-banner").fadeOut();
-    $('body').css('overflow', 'auto');
-  });
- }catch{}
+    $(".accept").click(function (e) {
+      $(".cookie-banner").fadeOut();
+      $("body").css("overflow", "auto");
+    });
+  } catch {}
 </script>
 
 <script>
   // index.ejs
-  try{
+  try {
     document
-    .getElementById("getInTouchForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-    });
-  }catch{}
+      .getElementById("getInTouchForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+      });
+  } catch {}
 
   function validateGetInTouchForm() {
     var name = document.getElementById("getintouch-name")?.value || "";
@@ -103,7 +75,6 @@
       return false;
     }
 
-    // Form is valid
     return {
       name,
       email,
@@ -113,10 +84,10 @@
   }
 
   const getInTouch = async () => {
-    const result = validateGetInTouchForm()
+    const result = validateGetInTouchForm();
     if (result != false) {
       const url = "/api/v1/contact-us"; // Replace this with your API endpoint URL
-    
+
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -132,19 +103,18 @@
 
         const responseData = await response.json();
         console.log(responseData);
-        if(responseData?.status){
-           return Swal.fire({
+        if (responseData?.status) {
+          return Swal.fire({
             type: "success",
             title: "Getting in touch",
             text: "Thank you for getting in touch with us.",
             timer: 2000,
-            }).then(() => {
+          }).then(() => {
             // Navigate to the new page
-            window.location.href = '/';
-            });
-
+            window.location.href = "/";
+          });
         }
-        alert("We could not receive your message at this time")
+        alert("We could not receive your message at this time");
       } catch (error) {
         console.error("Error:", error);
       }

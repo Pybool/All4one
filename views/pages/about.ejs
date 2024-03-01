@@ -94,8 +94,7 @@
                   Incorporated in England & Wales as a Private limited Company,
                   with a registration number of 13666845. We are registerered
                   with the Care Quality Commission (CQC) and a member of United
-                  Kingdom Home Care Association (UKHCA). We provide services for
-                  our clients. We provide comprehensive person-centred
+                  Kingdom Home Care Association (UKHCA). We provide comprehensive person-centred
                   domiciliary care services to children aged 13-18, Adults aged
                   18-65 & Adults aged 65 years and beyond. We employ the
                   services of support/care staff who are experienced, have the
@@ -103,15 +102,7 @@
                   comprehensive range of domiciliary, supported living and basic
                   nursing observations where necessary to our clients.
                 </p>
-                <div class="about-info-wrap">
-                  <!-- <div class="thumb">
-                    <img src="/assets/img/images/royaltyfree/senior-woman-talking-with-her-doctor_23-2148962385.png" alt="" />
-                  </div> -->
-                  <div class="content">
-                    <h4>taye oyelekan</h4>
-                    <span>Founder</span>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -299,9 +290,9 @@
             </div>
             <div class="col-xl-7 col-lg-6">
               <div class="newsletter-form">
-                <form id="newsletterForm">
-                  <input style="text-transform: lowercase;" id="subscriptionEmail" type="email" placeholder="enter email address" />
-                  <button onclick="subscribeNewsletter('subscriptionEmail')" class="btn">
+                <form id="newsletterForm" action="/api/v1/subscribe-newsletter" method="POST">
+                  <input style="text-transform: lowercase;" id="newsletterInput" type="email" placeholder="Enter email address" />
+                  <button onclick="subscribeNewsletter()" class="btn">
                     <i class="fal fa-envelope"></i> subscribe now
                   </button>
                 </form>

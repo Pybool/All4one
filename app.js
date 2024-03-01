@@ -24,13 +24,13 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(
-  express.static(path.join(__dirname, "public"), {
-    maxAge: "1d",
-  })
-);
+// app.use(
+//   express.static(path.join(__dirname, "public"), {
+//     maxAge: "1d",
+//   })
+// );
 
 app.use("/", indexRouter);
 mongoose
@@ -44,33 +44,28 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
-// app.listen(PORT, () => {
-//   debug(`Listening on port ${PORT}`);
-// });
-
 const httpServer = http.createServer(app);
 
 httpServer.listen(PORT, () => {
   console.log(`Http Server is running on port ${PORT}`);
 });
 
-// Create HTTPS server
 // Load SSL certificate and private key
-const privateKey = fs.readFileSync('./certs/_.all4onecareservices.co.uk_private_key.key', 'utf8');
-const certificate = fs.readFileSync('./certs/all4onecareservices.co.uk_ssl_certificate.pem', 'utf8');
+// const privateKey = fs.readFileSync('./certs/_.all4onecareservices.co.uk_private_key.key', 'utf8');
+// const certificate = fs.readFileSync('./certs/all4onecareservices.co.uk_ssl_certificate.pem', 'utf8');
 // const ca = fs.readFileSync('/path/to/chainfile.crt', 'utf8'); // Optional: Certificate Authority chain file
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-    // ca: ca // Optional
-};
+// const credentials = {
+//     key: privateKey,
+//     cert: certificate,
+//     ca: ca 
+// };
 
-const httpsServer = https.createServer(credentials, app);
+// const httpsServer = https.createServer(credentials, app);
 
-const HTTPSPORT = 443;
+// const HTTPSPORT = 443;
 
-httpsServer.listen(HTTPSPORT, () => {
-  console.log(`Secure Server is running on port ${HTTPSPORT}`);
-});
+// httpsServer.listen(HTTPSPORT, () => {
+//   console.log(`Secure Server is running on port ${HTTPSPORT}`);
+// });
 
 module.exports = app;

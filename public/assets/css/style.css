@@ -45,7 +45,11 @@ footer{
   margin-top:100px;
 }
 
-
+@media only screen and (max-width: 768px) {
+  input {
+    font-size: 13px!important; 
+  }
+}
 
 .select {
   width: 100%;
@@ -4528,7 +4532,7 @@ label {
 
 /* Preloader */
 #preloader {
-  background-color: #0a174c;
+  background-color: orange;
   height: 100%;
   width: 100%;
   position: fixed;
