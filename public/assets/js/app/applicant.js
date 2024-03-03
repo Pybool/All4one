@@ -78,15 +78,20 @@ const applicationFields = [
   "signatoryDate",
 ];
 
-const fileInputLabel = document.getElementById("fileInputLabel");
-const fileInput = document.getElementById("signature");
-fileInput.addEventListener("change", function () {
-  if (fileInput.files.length > 0) {
-    fileInputLabel.textContent = fileInput.files[0].name;
-  } else {
-    fileInputLabel.textContent = "Select an image";
-  }
-});
+let fileInputLabel ;
+let fileInput;
+
+try {
+  fileInputLabel = document.getElementById("fileInputLabel");
+  fileInput = document.getElementById("signature");
+  fileInput.addEventListener("change", function () {
+    if (fileInput.files.length > 0) {
+      fileInputLabel.textContent = fileInput.files[0].name;
+    } else {
+      fileInputLabel.textContent = "Select an image";
+    }
+  });
+} catch {}
 
 function getQueryParamValue(paramName) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -101,7 +106,6 @@ function getQueryParamValue(paramName) {
 
   const applicationId = getQueryParamValue("applicationId");
   if (applicationId !== null && applicationId.trim() !== "") {
-    // Assuming `applicantId` was a typo and should be `applicationId`
     await getVacancyApplication(applicationId);
   }
 })();
@@ -260,31 +264,40 @@ document
   .getElementById("applicationForm")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
-    
-    
+
+    console.log(event.submitter?.id);
     let iscomplete = event.submitter?.id || "0";
     let confirmation = false;
     if (iscomplete == "1") {
-      const errors = validateApplicationForm(getFormValues())
-      if(errors.length > 0){
-        console.log(errors)
-        return alert("Please fill up all required fields ,ensure all email addresses are valid and phone numbers are valid, Phone numbers must be in UK format with country code +44 (0) ...")
+      const errors = validateApplicationForm(getFormValues());
+      if (errors.length > 0) {
+        console.log(errors);
+        return alert(
+          "Please fill up all required fields ,ensure all email addresses are valid and phone numbers are valid, Phone numbers must be in UK format with country code +44 (0) ..."
+        );
       }
-      const fileInputLabel = document.getElementById("fileInputLabel")
-      console.log(!fileInput.files.length > 0 , fileInputLabel)
-      if (!fileInput.files.length > 0 && !fileInputLabel.querySelector('a').getAttribute('href').includes('/assets')) {
-        return alert("Please select a file")
+      const fileInputLabel = document.getElementById("fileInputLabel");
+      console.log(!fileInput.files.length > 0, fileInputLabel);
+      if (
+        !fileInput.files.length > 0 &&
+        !fileInputLabel
+          .querySelector("a")
+          .getAttribute("href")
+          .includes("/assets")
+      ) {
+        return alert("Please select a file");
       }
       confirmation = confirm(
         "Are you sure you want to submit this application? You will not be able to edit it later "
       );
+      if (confirmation) {
+        iscomplete = true;
+      } else {
+        iscomplete = false;
+        return null;
+      }
     }
-    if (confirmation) {
-      iscomplete = true;
-    } else {
-      iscomplete = false;
-      return null
-    }
+
     fetch(`/api/v1/submit-application?iscomplete=${iscomplete}`, {
       method: "POST",
       headers: {
@@ -304,9 +317,9 @@ document
           if (fileInput.files.length > 0) {
             await sendSignature(data?.data?.applicantId);
           }
-          
-          if(iscomplete){
-            window.location.reload()
+
+          if (iscomplete) {
+            window.location.reload();
           }
         } else {
           // Handle other cases if needed
