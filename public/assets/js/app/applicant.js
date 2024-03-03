@@ -75,28 +75,36 @@ const applicationFields = [
   "nokAddress",
   "nokPhone",
   "nokRelationship",
-  "signature",
   "signatoryDate",
 ];
+
+const fileInputLabel = document.getElementById("fileInputLabel");
+const fileInput = document.getElementById("signature");
+fileInput.addEventListener("change", function () {
+  if (fileInput.files.length > 0) {
+    fileInputLabel.textContent = fileInput.files[0].name;
+  } else {
+    fileInputLabel.textContent = "Select an image";
+  }
+});
 
 function getQueryParamValue(paramName) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(paramName);
 }
 
-(async function() {
-  const getQueryParamValue = function(paramName) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(paramName);
+(async function () {
+  const getQueryParamValue = function (paramName) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(paramName);
   };
 
-  const applicationId = getQueryParamValue('applicationId');
+  const applicationId = getQueryParamValue("applicationId");
   if (applicationId !== null && applicationId.trim() !== "") {
-      // Assuming `applicantId` was a typo and should be `applicationId`
-      await getVacancyApplication(applicationId);
-  } 
+    // Assuming `applicantId` was a typo and should be `applicationId`
+    await getVacancyApplication(applicationId);
+  }
 })();
-
 
 function getFormValues() {
   var values = {};
@@ -121,17 +129,69 @@ function getFormValues() {
   } catch {
     return values;
   }
-
   return values;
 }
 
 $(".returnApplicantBtn").click(async function (e) {
-  const applicantId =  document.getElementById("applicantIdInput")?.value;
+  const applicantId = document.getElementById("applicantIdInput")?.value;
   await getVacancyApplication(applicantId);
 });
 
+async function sendSignature(applicantId) {
+  // Get the file input element
+  var fileInput = document.querySelector('input[name="signature"]');
+
+  // Check if a file has been selected
+  if (fileInput.files.length > 0) {
+    // Get the selected file
+    var file = fileInput.files[0];
+
+    // Check if the file is an image
+    if (file.type.startsWith("image/")) {
+      // Check if the file size is less than 5MB
+      if (file.size <= 5 * 1024 * 1024) {
+        // Create a new FormData object
+        var formData = new FormData();
+
+        // Append the file to the FormData object
+        formData.append("signature", file);
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Define the backend URL
+        var url = `/api/v1/append-signature?applicationId=${applicantId}`;
+
+        // Open a POST request to the backend URL
+        xhr.open("POST", url, true);
+
+        // Set the onload event handler
+        xhr.onload = function () {
+          // Check if the request was successful
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // Request was successful, handle response here
+            console.log("File uploaded successfully");
+          } else {
+            // Request failed, handle error here
+            console.error("File upload failed");
+          }
+        };
+
+        // Send the FormData object to the backend
+        xhr.send(formData);
+      } else {
+        // File size exceeds 5MB, display an error message
+        alert("File size exceeds 5MB. Please select a smaller file.");
+      }
+    } else {
+      // Selected file is not an image, display an error message
+      alert("Selected file is not an image. Please select an image file.");
+    }
+  }
+}
+
 async function getVacancyApplication(_applicantId) {
-  const applicantId = _applicantId
+  const applicantId = _applicantId;
   if (!applicantId || applicantId.trim() == "") {
     return alert("Invalid application id");
   }
@@ -154,9 +214,8 @@ async function getVacancyApplication(_applicantId) {
       const newUrl = `${window.location.origin}${window.location.pathname}?applicationId=${applicantId}`;
       window.history.pushState({ path: newUrl }, "", newUrl);
       Object.keys(responseData?.data).forEach((key) => {
-        if (responseData?.data[key] != null) {
+        if (responseData?.data[key] != null && key !== "signature") {
           try {
-            console.log(document.getElementsByName(key));
             if (
               responseData?.data[key] != true &&
               responseData?.data[key] != false
@@ -179,10 +238,20 @@ async function getVacancyApplication(_applicantId) {
             }
           } catch {}
         }
+        if (key === "signature") {
+          const signatureUrl = responseData?.data[key];
+          fileInputLabel.textContent = "";
+          const textContent =
+            "Last Signature: " +
+              signatureUrl
+                ?.substring(signatureUrl.lastIndexOf("/") + 1)
+                .replace("Select an image", "") || "Invalid file";
+          fileInputLabel.outerHTML = `<p id="fileInputLabel" class="text-left"><a target="_blank" style="color:orange;" href="${signatureUrl}">${textContent}</a></p>`;
+        }
       });
-      return console.log(responseData.data);
+      return null;
     }
-    alert("We could not receive your message at this time");
+    alert("We could not retrieve your application at this time");
   } catch (error) {
     console.error("Error:", error);
   }
@@ -191,14 +260,32 @@ document
   .getElementById("applicationForm")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
-    // const formData = new FormData(this);
-    // let formDataObject = {};
-    // for (const [key, value] of formData) {
-    //     formDataObject[`${key}`] = value;
-    // }
-
-    // Fetch API to submit the form data
-    fetch("/api/v1/submit-application", {
+    
+    
+    let iscomplete = event.submitter?.id || "0";
+    let confirmation = false;
+    if (iscomplete == "1") {
+      const errors = validateApplicationForm(getFormValues())
+      if(errors.length > 0){
+        console.log(errors)
+        return alert("Please fill up all required fields ,ensure all email addresses are valid and phone numbers are valid, Phone numbers must be in UK format with country code +44 (0) ...")
+      }
+      const fileInputLabel = document.getElementById("fileInputLabel")
+      console.log(!fileInput.files.length > 0 , fileInputLabel)
+      if (!fileInput.files.length > 0 && !fileInputLabel.querySelector('a').getAttribute('href').includes('/assets')) {
+        return alert("Please select a file")
+      }
+      confirmation = confirm(
+        "Are you sure you want to submit this application? You will not be able to edit it later "
+      );
+    }
+    if (confirmation) {
+      iscomplete = true;
+    } else {
+      iscomplete = false;
+      return null
+    }
+    fetch(`/api/v1/submit-application?iscomplete=${iscomplete}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set correct content type
@@ -206,7 +293,7 @@ document
       body: JSON.stringify(getFormValues()),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(async (data) => {
         if (data.status === true) {
           Swal.fire({
             type: "success",
@@ -214,10 +301,17 @@ document
             text: "Application was updated sucessfully",
             timer: 1500,
           });
+          if (fileInput.files.length > 0) {
+            await sendSignature(data?.data?.applicantId);
+          }
+          
+          if(iscomplete){
+            window.location.reload()
+          }
         } else {
           // Handle other cases if needed
           console.log("Error:", data.message);
-          alert(data.message)
+          alert(data.message);
         }
       })
       .catch((error) => console.error("Error:", error));

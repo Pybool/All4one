@@ -1,7 +1,8 @@
 const express = require("express");
 const data = require("./services");
 const multer = require('multer');
-
+const path = require('path');
+const fs = require('fs');
 const indexControllers = require("../controllers/index");
 
 const router = express.Router();
@@ -16,7 +17,7 @@ function getCurrentDate() {
 // Define storage for the uploaded files
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join('public', 'uploads', getCurrentDate());
+        const uploadDir = path.join('public', 'assets/uploads', getCurrentDate());
         fs.mkdirSync(uploadDir, { recursive: true }); // Create directory if not exists
         cb(null, uploadDir);
     },
@@ -73,11 +74,15 @@ router.get("/careers", (req, res, next) => {
 
 router.post("/api/v1/contact-us", indexControllers.sendMessage);
 
-router.post("/api/v1/submit-application", upload.single('signature'), indexControllers.submitApplication);
+router.post("/api/v1/submit-application", indexControllers.submitApplication);
 
 router.get("/api/v1/fetch-application", indexControllers.getApplication);
 
 router.post("/api/v1/subscribe-newsletter", indexControllers.subscribeNewsLetter);
+
+router.post("/api/v1/append-signature", upload.single('signature'), indexControllers.appendApplicationSignature);
+
+
 
 
 

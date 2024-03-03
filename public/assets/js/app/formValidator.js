@@ -1,9 +1,3 @@
-function generateUniqueCode(prefix) {
-  const timestamp = Date.now(); // Get current timestamp
-  const randomNumber = Math.floor(Math.random() * 10000); // Generate a random number
-  return prefix + "-" + timestamp + "-" + randomNumber;
-}
-
 const requiredFields = [
   "firstName",
   "lastName",
@@ -67,5 +61,3 @@ const isValidUKPhoneNumber = (phone) => {
     /^(?:(?:\+44\s?|0)[1-9]\d{1,4}|(\(?(?:0(?:0|11)\)?[\s-]?\(?|\+44\s?\(0\)?[\s-]?)\d{3,4}\)?[\s-]?\d{3,4})[\s-]?\d{4})$/;
   return phoneRegex.test(phone);
 };
-
-module.exports = { generateUniqueCode, validateApplicationForm };

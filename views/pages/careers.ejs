@@ -55,19 +55,27 @@
       <div class="contact-area pt-120">
         <div class="container">
           <h6>
-            If you would like to apply for a position at All4One care
-            services, please fill in and submit the form below. You will be
-            asked to bring relevant documentation along with you to your
-            interview.
+            If you would like to apply for a position at All4One care services,
+            please fill in and submit the form below. You will be asked to bring
+            relevant documentation along with you to your interview.
           </h6>
-          <div style="gap:0px" class="col-md-12 pb-35 flex-row-end">
+          <label style="color:red">
+              To ensure your progress is saved accurately, kindly provide a valid <strong>EMAIL ADDRESS</strong> at any stage of form completion, also note that while the required fields are essential for submitting the completed form, they are not enforced when saving progress.
+          </label>
+          <div style="gap: 0px" class="col-md-12 pb-35 flex-row-end">
             <div class="col-md-6">
-              <small class="text-left" style="color: orange"
+              <small class="text-left" style="color: orange;text-transform: uppercase;"
                 >For returning applicants only</small
               >
               <div class="">
                 <input
-                  style="border-left: none; border-right: none;border-top: none;width: 90%;margin-bottom: 20px;"
+                  style="
+                    border-left: none;
+                    border-right: none;
+                    border-top: none;
+                    width: 90%;
+                    margin-bottom: 20px;
+                  "
                   type="text"
                   name="applicantId"
                   id="applicantIdInput"
@@ -77,8 +85,10 @@
             </div>
             <div class="col-md-6">
               <div class="form-grp">
-                 
-                <button style="width: 90%" class="btn btn-primary returnApplicantBtn">
+                <button
+                  style="width: 90%"
+                  class="btn btn-primary returnApplicantBtn"
+                >
                   I am a returning applicant
                 </button>
               </div>
@@ -86,10 +96,13 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <div class="contact-form-wrap">
-                <form id="applicationForm" action="/api/v1/submit-application" method="POST">
+              <div style="margin-bottom: 0px;" class="contact-form-wrap">
+                <form
+                  id="applicationForm"
+                  action="/api/v1/submit-application"
+                  method="POST"
+                >
                   <div class="row">
-
                     <div class="col-md-6">
                       <div class="form-grp">
                         <input
@@ -97,7 +110,7 @@
                           name="firstName"
                           placeholder="Enter first name"
                         />
-                        <i class="fal fa-user"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -107,7 +120,7 @@
                           name="lastName"
                           placeholder="Enter last name"
                         />
-                        <i class="fal fa-user"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -117,7 +130,7 @@
                           name="email"
                           placeholder="Enter your email"
                         />
-                        <i class="fal fa-envelope"></i>
+                        <i style="color:red;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -127,7 +140,7 @@
                           name="phone"
                           placeholder="Phone Number"
                         />
-                        <i class="fal fa-phone"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -147,7 +160,7 @@
                           name="nin"
                           placeholder="National Insurance Number"
                         />
-                        <i class="fal fa-user"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-12">
@@ -157,7 +170,7 @@
                           name="address"
                           placeholder="Address"
                         />
-                        <i class="fal fa-location"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-12">
@@ -178,11 +191,13 @@
                         you fall into:
                       </p>
                       <div class="form-grp">
-                        <input
-                          type="date"
-                          name="dob"
-                          placeholder="Date of Birth"
-                        />
+                        <select name="dob" class="select">
+                          <option>21-30</option>
+                          <option>31-40</option>
+                          <option>41-50</option>
+                          <option>51-60</option>
+                        </select>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-12">
@@ -377,20 +392,33 @@
                         How many hours are you looking to work?
                       </p>
                       <div class="form-grp">
-                        <input type="text" name="workHours" />
-                        <i class="fal fa-user"></i>
+                        <input style="text-align:center" type="number" name="workHours" />
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <p class="text-left">Where would you like to work</p>
                       <div class="form-grp">
                         <select name="likeToWorkLocation" class="select">
-                          <option>Warsaw</option>
-                          <option>London</option>
-                          <option>Middlesbrough</option>
-                          <option>Yorkshire</option>
+                          <option value="Chelmsford">Chelmsford</option>
+                          <option value="Colchester">Colchester</option>
+                          <option value="Southend-on-Sea">
+                            Southend-on-Sea
+                          </option>
+                          <option value="Basildon">Basildon</option>
+                          <option value="Harlow">Harlow</option>
+                          <option value="Brentwood">Brentwood</option>
+                          <option value="Braintree">Braintree</option>
+                          <option value="Clacton-on-Sea">Clacton-on-Sea</option>
+                          <option value="Witham">Witham</option>
+                          <option value="Maldon">Maldon</option>
+                          <option value="Rayleigh">Rayleigh</option>
+                          <option value="Wickford">Wickford</option>
+                          <option value="Billericay">Billericay</option>
+                          <option value="Grays">Grays</option>
+                          <option value="Canvey Island">Canvey Island</option>
                         </select>
-                        <i class="fal fa-user"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -416,12 +444,15 @@
                       </small>
                       <div class="form-grp">
                         <input type="text" name="recommendedBy" />
-                        <i class="fal fa-user"></i>
+                        <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-grp text-left">
-                        <button class="btn btn-primary saveProgress" type="submit">
+                        <button
+                          class="btn btn-primary saveProgress"
+                          type="submit"
+                        >
                           Save Progress
                         </button>
                       </div>
@@ -696,7 +727,6 @@
                               >
                             </div>
                           </div>
-                          
                         </div>
                       </div>
                       <hr />
@@ -712,7 +742,7 @@
                               name="school1"
                               placeholder="(1) Name & address of school"
                             />
-                            <i class="fal fa-location"></i>
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -722,7 +752,7 @@
                               name="school1Qualification"
                               placeholder="(1) Qualification Achieved"
                             />
-                            <i class="fal fa-location"></i>
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                       </div>
@@ -734,7 +764,7 @@
                               name="school2"
                               placeholder="(2) Name & address of school"
                             />
-                            <i class="fal fa-location"></i>
+                            
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -744,7 +774,7 @@
                               name="school2Qualification"
                               placeholder="(2) Qualification Achieved"
                             />
-                            <i class="fal fa-location"></i>
+                            
                           </div>
                         </div>
                       </div>
@@ -783,7 +813,7 @@
                               name="workPlace1RateOfPay"
                               placeholder="Enter your rate of pay"
                             />
-                            <i class="fal fa-envelope"></i>
+                            
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -998,6 +1028,7 @@
                         <div class="col-md-6">
                           <div class="form-grp">
                             <input
+                              style="width:100%"
                               type="date"
                               name="workPlace3DateOfEmployment"
                               placeholder="Select your employment date"
@@ -1106,7 +1137,10 @@
                     </div>
                     <div class="col-md-12">
                       <div class="form-grp text-left">
-                        <button class="btn btn-primary saveProgress" type="submit">
+                        <button
+                          class="btn btn-primary saveProgress"
+                          type="submit"
+                        >
                           Save Progress
                         </button>
                       </div>
@@ -1131,6 +1165,7 @@
                               name="guarantorName"
                               placeholder="Enter guarantor name"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -1140,6 +1175,7 @@
                               name="guarantorPhone"
                               placeholder="Enter guarantor phone"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -1149,6 +1185,7 @@
                               name="guarantorEmail"
                               placeholder="Enter guarantor email"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -1159,7 +1196,7 @@
                               id="howDoUKnowGuarantor"
                               placeholder="How do you know this person?"
                             ></textarea>
-                            <i class="fal fa-pencil"></i>
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                       </div>
@@ -1172,6 +1209,7 @@
                               name="guarantor2Name"
                               placeholder="Enter guarantor name"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -1181,6 +1219,7 @@
                               name="guarantor2Phone"
                               placeholder="Enter guarantor phone"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -1190,6 +1229,7 @@
                               name="guarantor2Email"
                               placeholder="Enter guarantor email"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -1200,7 +1240,7 @@
                               id="howDoUKnowGuarantor2"
                               placeholder="How do you know this person?"
                             ></textarea>
-                            <i class="fal fa-pencil"></i>
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                       </div>
@@ -1215,6 +1255,7 @@
                               name="nokName"
                               placeholder="Enter next of kin name"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -1224,6 +1265,7 @@
                               name="nokAddress"
                               placeholder="Enter next of kin address"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -1233,6 +1275,7 @@
                               name="nokPhone"
                               placeholder="Enter next of kin phone"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -1242,6 +1285,7 @@
                               name="nokRelationship"
                               placeholder="Describe relationship"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                       </div>
@@ -1262,22 +1306,25 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-grp">
+                            <p class="text-left" for="signature" id="fileInputLabel">Select an image<a target="_blank" href=""></a></p>
                             <input
                               type="file"
+                              id="signature"
                               name="signature"
-                              placeholder="Signature"
+                              accept="image/*"
                             />
+                            <i style="color:orangered;font-size: 7px;" class="fal fas fa-asterisk"></i>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-grp">
-                            <input type="date" name="signatoryDate" />
+                            <input hidden type="date" name="signatoryDate" />
                           </div>
                         </div>
                       </div>
                       <hr />
                     </div>
-                    <button type="submit" class="btn">
+                    <button id="1" type="submit" class="btn">
                       Complete Application
                     </button>
                   </div>
@@ -1296,7 +1343,7 @@
     <!-- footer-area-end -->
     <!-- JS here -->
     <%- include('../partials/scripts'); %>
+    <script src="/assets/js/app/formValidator.js"></script>
     <script src="/assets/js/app/applicant.js"></script>
   </body>
-
 </html>

@@ -3,6 +3,7 @@ const Application = require("../models/careers.model");
 const Newsletter = require("../models/newsletter.model");
 const sendMail = require("../services/mailservice");
 const generateUniqueCode = require("./helper").generateUniqueCode;
+const validateApplicationForm = require("./helper").validateApplicationForm;
 const ejs = require("ejs");
 const juice = require("juice");
 
@@ -46,7 +47,6 @@ const sendMessage = async (req, res) => {
           email,
           name: newMessage?.name,
           message: newMessage?.message,
-          
         }
       );
       const mailOptions = {
@@ -78,17 +78,38 @@ const submitApplication = async (req, res) => {
     let response;
     let applicantId;
     let applicationData = req.body;
+    let errors = validateApplicationForm(applicationData);
+    if (errors.length > 0) {
+      console.log("Form errors ", errors)
+      return res.send({
+        status: false,
+        message:
+          "Please fill up all required fields ,ensure all email addresses are valid and phone numbers are valid, Phone numbers must be in UK format with country code +44 (0) ...",
+      });
+    }
+    let exists = await Application.findOneAndUpdate({
+      email: applicationData.email,
+    });
+    if (exists.isComplete) {
+      return res.send({
+        status: false,
+        message:
+          "This application is now read-only, you cannot edit this application anymore",
+      });
+    }
+    if (req.query.iscomplete == "true") {
+      applicationData.isComplete = true;
+    }
+    delete applicationData.signature;
+    console.log(applicationData);
     applicantId = req.query.applicantId || null;
-    // applicationData.applicantId = applicantId;
 
-    //Change 'on' for boolean fields to true
     Object.keys(applicationData).forEach((key) => {
       if (applicationData[key] == "on") {
         applicationData[key] = true;
       }
     });
 
-    //Handle case when checkboxes are not sent by form, default those fields to false
     for (const field of applicationFormMissableFields) {
       if (!applicationData[field]) {
         applicationData[field] = false;
@@ -107,23 +128,17 @@ const submitApplication = async (req, res) => {
       });
     }
     const query = { $or: [{ applicantId }, { email: applicationData?.email }] };
-    applicationData.signature = "";
-    if (req.file) {
-      applicationData.signature = `${req.protocol}://${req.get("host")}/${
-        req.file.path
-      }`;
-    }
-
     let dbApplication = await Application.findOneAndUpdate(
       query,
       { $set: applicationData },
       options
     );
-    
+
     if (!dbApplication.applicantId) {
-      dbApplication.applicantId = generateUniqueCode('A41');
+      dbApplication.applicantId = generateUniqueCode("A41");
       dbApplication = await dbApplication.save();
     }
+    delete dbApplication.signature;
     if (dbApplication._id) {
       response = {
         status: true,
@@ -131,14 +146,13 @@ const submitApplication = async (req, res) => {
         message: "Application has been updated",
       };
       let emailOrName = dbApplication?.firstName;
-      if(emailOrName?.trim() == ""){
-        emailOrName = applicationData?.email
+      if (emailOrName?.trim() == "") {
+        emailOrName = applicationData?.email;
       }
       const template = await ejs.renderFile(
         "views/pages/emailtemplates/applicationsuccess_email.ejs",
         {
           emailOrName,
-          
         }
       );
       const mailOptions = {
@@ -148,13 +162,15 @@ const submitApplication = async (req, res) => {
         text: `Application with application id ${dbApplication.applicantId} created or modified`,
         html: juice(template),
       };
-      sendMail(mailOptions)
-        .then((response) => {
-          console.log("Email sent successfully:", response);
-        })
-        .catch((error) => {
-          console.error("Failed to send email:", error);
-        });
+      if (applicationData.isComplete) {
+        sendMail(mailOptions)
+          .then((response) => {
+            console.log("Email sent successfully:", response);
+          })
+          .catch((error) => {
+            console.error("Failed to send email:", error);
+          });
+      }
     } else {
       response = {
         status: false,
@@ -163,7 +179,7 @@ const submitApplication = async (req, res) => {
     }
     res.send(response);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.send({
       status: false,
       message: "Something went wrong while submitting application",
@@ -173,7 +189,7 @@ const submitApplication = async (req, res) => {
 
 const getApplication = async (req, res) => {
   try {
-    const applicantId = req.query.applicationId;
+    const applicantId = req.query?.applicationId;
     const query = { $or: [{ applicantId }, { email: applicantId }] };
     const dbApplication = await Application.findOne(query);
     if (dbApplication) {
@@ -184,7 +200,7 @@ const getApplication = async (req, res) => {
       });
     }
     return res.send({ status: false, message: "Unsuccessful" });
-  } catch {
+  } catch (error) {
     return res.send({ status: false, message: "Something went wrong" });
   }
 };
@@ -199,13 +215,13 @@ const subscribeNewsLetter = async (req, res) => {
         message: "Please provide a valid email address",
       });
     }
-    let dbApplication = await Application.findOne({email:subscriber})
+    let dbApplication = await Application.findOne({ email: subscriber });
     let emailOrName = dbApplication?.firstName;
-      if(emailOrName?.trim() == ""){
-        emailOrName = subscriber
-      }
-    const exists =  await Newsletter.findOne({email:subscriber})
-    if(exists !== null){
+    if (emailOrName?.trim() == "") {
+      emailOrName = subscriber;
+    }
+    const exists = await Newsletter.findOne({ email: subscriber });
+    if (exists !== null) {
       return res.status(200).json({
         status: true,
         message: "You are already subscribed to our newsletter, Thank you.",
@@ -220,9 +236,9 @@ const subscribeNewsLetter = async (req, res) => {
         "views/pages/emailtemplates/newsletter_email.ejs",
         {
           emailOrName,
-          
         }
       );
+
       const mailOptions = {
         from: "INFO@ALL4ONECARESERVICES.CO.UK".toLowerCase(),
         to: subscriber,
@@ -230,6 +246,7 @@ const subscribeNewsLetter = async (req, res) => {
         text: `Thank you for subscribing to our newsletter`,
         html: juice(template),
       };
+
       sendMail(mailOptions)
         .then((response) => {
           console.log("Email sent successfully:", response);
@@ -247,10 +264,45 @@ const subscribeNewsLetter = async (req, res) => {
       message: "Unfortunately we could not subscribe you at this time",
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(400).json({
       status: false,
       message: "Something is not quite right",
+    });
+  }
+};
+
+const appendApplicationSignature = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.send({
+        status: false,
+        message: "No signature file was appended",
+      });
+    }
+    if (!req.file.mimetype.includes("image")) {
+      return res.send({
+        status: false,
+        message: "Uploaded file is not a valid image",
+      });
+    }
+    const applicantId = req.query.applicationId.trim();
+    let dbApplication = await Application.findOne({ applicantId });
+    if (!dbApplication) {
+      return res.send({ status: false, message: "Signature upload failed" });
+    }
+    dbApplication.signature =
+      "/" + req.file.path.replace(/\\/g, "/").replace("public/", "");
+    await dbApplication.save();
+    res.send({
+      status: true,
+      imageUrl: dbApplication.signature,
+      message: "Signature has been appended to application",
+    });
+  } catch {
+    return res.send({
+      status: false,
+      message: "Could not append signature to application",
     });
   }
 };
@@ -260,4 +312,5 @@ module.exports = {
   submitApplication,
   getApplication,
   subscribeNewsLetter,
+  appendApplicationSignature,
 };
