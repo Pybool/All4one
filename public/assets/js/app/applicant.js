@@ -264,11 +264,11 @@ document
   .getElementById("applicationForm")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
-
-    console.log(event.submitter?.id);
+    
+    
     let iscomplete = event.submitter?.id || "0";
     let confirmation = false;
-    if (iscomplete == "1") {
+    if (iscomplete === "1") {
       const errors = validateApplicationForm(getFormValues());
       if (errors.length > 0) {
         console.log(errors);
@@ -318,7 +318,7 @@ document
             await sendSignature(data?.data?.applicantId);
           }
 
-          if (iscomplete) {
+          if (iscomplete != "0") {
             window.location.reload();
           }
         } else {

@@ -51,7 +51,7 @@ const sendMessage = async (req, res) => {
       );
       const mailOptions = {
         from: "INFO@ALL4ONECARESERVICES.CO.UK".toLowerCase(),
-        to: "ekoemmanueljavl@gmail.com",
+        to: "INFO@ALL4ONECARESERVICES.CO.UK".toLowerCase(),
         subject: "Contact Us",
         text: `A new contact from All4One ${email} has gotten in touch with you`,
         html: juice(template),
@@ -78,14 +78,16 @@ const submitApplication = async (req, res) => {
     let response;
     let applicantId;
     let applicationData = req.body;
-    let errors = validateApplicationForm(applicationData);
-    if (errors.length > 0) {
-      console.log("Form errors ", errors)
-      return res.send({
-        status: false,
-        message:
-          "Please fill up all required fields ,ensure all email addresses are valid and phone numbers are valid, Phone numbers must be in UK format with country code +44 (0) ...",
-      });
+    if (req.query.iscomplete === "1") {
+      let errors = validateApplicationForm(applicationData);
+      if (errors.length > 0) {
+        console.log("Form errors ", errors);
+        return res.send({
+          status: false,
+          message:
+            "Please fill up all required fields ,ensure all email addresses are valid and phone numbers are valid, Phone numbers must be in UK format with country code +44 (0) ...",
+        });
+      }
     }
     let exists = await Application.findOneAndUpdate({
       email: applicationData.email,
@@ -97,7 +99,7 @@ const submitApplication = async (req, res) => {
           "This application is now read-only, you cannot edit this application anymore",
       });
     }
-    if (req.query.iscomplete == "true") {
+    if (req.query.iscomplete == "true" || req.query.iscomplete == "1") {
       applicationData.isComplete = true;
     }
     delete applicationData.signature;
