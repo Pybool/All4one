@@ -218,8 +218,8 @@ const subscribeNewsLetter = async (req, res) => {
       });
     }
     let dbApplication = await Application.findOne({ email: subscriber });
-    let emailOrName = dbApplication?.firstName;
-    if (emailOrName?.trim() == "") {
+    let emailOrName = dbApplication?.firstName || null;
+    if (emailOrName?.trim() === "" || emailOrName === null ) {
       emailOrName = subscriber;
     }
     const exists = await Newsletter.findOne({ email: subscriber });
