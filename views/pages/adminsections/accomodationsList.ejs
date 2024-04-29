@@ -1,0 +1,426 @@
+<style>
+    .img {
+        border-radius: 15px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        object-fit: contain;
+        background: black;
+    }
+
+    .img1 {
+        width: 11vw;
+        height: 230px;
+    }
+
+    .img2 {
+        width: 11vw;
+        height: 80px;
+    }
+
+    .img4 {
+        width: 11vw;
+        height: 200px;
+        margin-top: 15px;
+    }
+
+    .img3 {
+        width: 11vw;
+        height: 80px;
+    }
+
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .flex-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .img-card {
+        width: 25vw;
+        height: 400px;
+        background: white;
+        border-radius: 20px;
+        margin: 40px;
+        cursor: pointer;
+    }
+
+    .img-card-content {
+        height: 320px;
+        margin-left: 10px;
+    }
+
+    .img-card-meta label {
+        margin: 10px;
+        font-size: large;
+        font-weight: 400;
+    }
+
+    .flex-row-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .divider {
+        margin-top: 10px;
+        background-color: #e6dede;
+        ;
+        height: 1px;
+        width: 100%;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .glow-on-hover {
+        border: 1px solid white;
+        /* Set your desired base border color */
+        border-radius: 10px;
+        /* Add some rounded corners (optional) */
+        transition: all 0.2s ease-in-out;
+        /* Smooth transition effect */
+    }
+
+    .glow-on-hover:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+        /* Blue glow effect */
+    }
+
+    .edit {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+        background: trasparent;
+    }
+
+    .image-container {
+        position: relative;
+        /* Enable positioning for the overlay */
+    }
+
+
+
+    .overlay {
+        position: absolute;
+        /* Position overlay on top of image */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Dark translucent background */
+        opacity: 1;
+        /* Initially hide the overlay */
+        transition: opacity 0.3s ease-in-out;
+        /* Smooth transition on hover */
+        display: flex;
+        justify-content: center;
+        /* Center content horizontally */
+        align-items: center;
+        border-radius: 10px;
+        /* Center content vertically */
+    }
+
+    .overlay-text {
+        color: white;
+        font-size: 2em;
+        /* Adjust font size as needed */
+        font-weight: bold;
+    }
+
+    /* Styles for screens less than or equal to 767px (mobile) */
+    @media screen and (max-width: 767px) {
+      .flex-row-wrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .img-card {
+        width: 100%;
+        height: 400px;
+        background: white;
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 0px;
+        margin-top: 20px !important;
+      }
+
+      .flex-row {
+        display: flex;
+        flex-direction: row;
+        gap: 0px !important;
+      }
+
+      .img,
+      .img4 {
+        width: 100% !important;
+      }
+
+      .modal-content {
+        margin: 30% auto !important;
+        height: 70vh !important;
+      }
+
+      .carousel-img {
+        width: -webkit-fill-available !important;
+      }
+
+      #section-1 .content-slider nav .controls label {
+        width: 6.5% !important;
+      }
+
+    }
+
+    /* Styles for screens between 768px and 1024px (tablets) */
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      .flex-row-wrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .img-card {
+        width: 100%;
+        height: 400px;
+        background: white;
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 0px;
+        margin-top: 20px !important;
+      }
+
+      .flex-row {
+        display: flex;
+        flex-direction: row;
+        gap: 0px !important;
+      }
+
+      .img,
+      .img4 {
+        width: 100% !important;
+      }
+
+      .modal-content {
+        margin: 20% auto !important;
+        height: 70vh !important;
+      }
+
+      .carousel-img {
+        width: -webkit-fill-available !important;
+      }
+
+      #section-1 .content-slider nav .controls label {
+        width: 5% !important;
+      }
+
+    }
+
+    /* Styles for screens between 768px and 1024px (tablets) */
+    @media screen and (min-width: 1025px) {
+      .img-card {
+        width: 35vw !important;
+      }
+
+      .img-card-content {
+        margin-left: 0px !important;
+
+      }
+
+      .img,
+      .img4 {
+        width: 100% !important;
+      }
+
+      .col-sm-6 {
+        -ms-flex: 50% !important;
+        flex: 50% !important;
+      }
+
+      .modal-content {
+        margin: 13% auto !important;
+        height: 70vh !important;
+      }
+
+      .carousel-img {
+        width: -webkit-fill-available !important;
+      }
+    }
+
+</style>
+<script>
+    function openModal(id) {
+        console.log("Accomdation clicked ", id)
+        document.body.classList.add('modal-open'); // Add class to body on open
+        document.querySelector(".modal").style.display = 'block'
+        const modalStore = document.getElementById(`store-${id}`);
+        const activeData = JSON.parse(modalStore.value);
+        renderSlider(activeData);
+    }
+
+    function closeModal() {
+        document.body.classList.remove('modal-open'); // Remove class to body on close
+        document.querySelector(".modal").style.display = 'none'
+        // Your modal closing logic here...
+    }
+
+</script>
+<script>
+
+    function renderSlider(activeData) {
+        console.log("Active data for rendering ", activeData)
+        const contentSlider = document.querySelector('.content-slider');
+        const slider = document.querySelector('.slider');
+        const controls = document.querySelector('.controls');
+
+        // contentSlider.innerHTML = ''; // Clear existing content
+        slider.innerHTML = ''; // Clear existing content
+        controls.innerHTML = ''; // Clear existing content
+
+        if (activeData?.images?.length > 0) {
+            activeData.images.forEach((image, index) => {
+                // Create Radio Button
+                const radioInput = document.createElement('input');
+                radioInput.type = 'radio';
+                radioInput.id = `banner${index + 1}`;
+                radioInput.classList.add('sec-1-input');
+                radioInput.name = 'banner';
+                if (index === 0) {
+                    radioInput.checked = true;
+                }
+                contentSlider.appendChild(radioInput);
+
+                // Create Image Banner
+                const banner = document.createElement('div');
+                banner.id = `top-banner-${index + 1}`;
+                banner.classList.add('banner');
+                const bannerInnerWrapper = document.createElement('div');
+                bannerInnerWrapper.classList.add('banner-inner-wrapper');
+                const bannerImage = document.createElement('img');
+                bannerImage.classList.add('carousel-img', 'img-primary');
+                bannerImage.src = image.replaceAll('\\', '\\'); // Escape backslashes
+                bannerInnerWrapper.appendChild(bannerImage);
+                
+                banner.appendChild(bannerInnerWrapper);
+                slider.appendChild(banner);
+                // bannerContainer.appendChild(banner);
+
+                // Create Navigation Label
+                const label = document.createElement('label');
+                label.for = `banner${index + 1}`;
+                const progressBar = document.createElement('div');
+                progressBar.classList.add('progressbar');
+                const progressBarFill = document.createElement('span');
+                progressBarFill.classList.add('progressbar-fill');
+                progressBar.appendChild(progressBarFill);
+                const labelNumber = document.createElement('span');
+                let val = index + 1;
+                if(val < 10){
+                    val = '0'+ (val).toString();
+                }
+                labelNumber.textContent = val
+                label.appendChild(progressBar);
+                label.appendChild(labelNumber);
+                controls.appendChild(label);
+            })
+        }
+    }    
+</script>
+
+<%- include('../../partials/swipermodal'); %>
+
+    <div class="contact-area">
+        <div style="max-width:97vw; max-height: fit-content; background: whitesmoke;" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div style="justify-content: space-evenly;" class="flex-row-wrap">
+                        <% context?.forEach(function(accomodation, index) { %>
+                            <input hidden id="store-<%= accomodation._id%>" value="<%= JSON.stringify(accomodation) %>"/>
+                            <div id="<%= accomodation._id%>" onclick="openModal(`<%= accomodation._id%>`)" class="img-card zoom">
+                              <% if (accomodation?.images.length >= 4) { %>
+                                  <div class="img-card-content flex-row">
+                                      <div class="flex-col">
+                                          <img class="img img1 glow-on-hover img-primary"
+                                              src="<%= accomodation?.images[0] %>" />
+                                          <img class="img img2 glow-on-hover"
+                                              src="<%= accomodation?.images[1]%>" />
+                                      </div>
+                                      <div class="flex-col">
+                                          <img class="img img3 glow-on-hover"
+                                              src="<%= accomodation?.images[2]%>" />
+                                          <div class="image-container img4 glow-on-hover">
+                                              <img style="margin-top:0px" class="img img4 glow-on-hover"
+                                                  src="<%= accomodation?.images[3]%>"
+                                                  alt="Image with overlay">
+                                              <% if (accomodation?.images.length > 4) { %>
+                                                  <div  class="overlay">
+                                                      <span class="overlay-text zoom">+<%= (accomodation?.images.length - 4)%></span>
+                                                  </div>
+                                              <% }; %>
+                                              
+                                          </div>
+                                          <!-- <img class="img img4 glow-on-hover" src="/assets/img/accomodations/upminster/IMG-20240426-WA0040.jpg"/> -->
+                                      </div>
+                                  </div>
+                              <% } %>
+                              <% if (accomodation?.images.length == 3) { %>
+                                <div class="img-card-content flex-row">
+                                    <div class="flex-col">
+                                        <img class="img img1 glow-on-hover img-primary"
+                                            src="<%= accomodation?.images[0] %>" />
+                                        <img class="img img2 glow-on-hover"
+                                            src="<%= accomodation?.images[1]%>" />
+                                    </div>
+                                    <div class="flex-col">
+                                        <img style="height: 100%;" class="img img3 glow-on-hover"
+                                            src="<%= accomodation?.images[2]%>" />
+                                        <!-- <img class="img img4 glow-on-hover" src="/assets/img/accomodations/upminster/IMG-20240426-WA0040.jpg"/> -->
+                                    </div>
+                                </div>
+                              <% } %>
+                              <% if (accomodation?.images.length == 2) { %>
+                                <div class="img-card-content">
+                                    <div style="height: 100%;" class="flex-col">
+                                        <img style="height:47%;width:100%" class="img img1 glow-on-hover img-primary"
+                                            src="<%= accomodation?.images[0] %>" />
+                                        <img style="height:47%;width:100%" class="img img2 glow-on-hover"
+                                            src="<%= accomodation?.images[1]%>" />
+                                    </div>
+                                </div>
+                              <% } %>
+                              <% if (accomodation?.images.length == 1) { %>
+                                <div class="img-card-content">
+                                    <div style="height: 100%;" class="flex-col">
+                                        <img style="height:94%;width:100%" class="img img1 glow-on-hover img-primary"
+                                            src="<%= accomodation?.images[0] %>" />
+                                    </div>
+                                </div>
+                              <% } %>
+                                <div class="divider"></div>
+                                <div class="img-card-meta flex-row">
+                                    <div>
+                                        <label>Location: <%= accomodation?.name %>, <%= accomodation?.location %></label>
+                                        <!-- <label>Listed: <%= accomodation?.createdAt %></label> -->
+                                    </div>
+                                    <svg class="edit" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path
+                                            d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                                    </svg>
+                                </div>
+                            </div>
+                          <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

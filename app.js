@@ -9,6 +9,8 @@ const logger = require("morgan");
 const dotenv = require("dotenv");
 const debug = require("debug")("express");
 const indexRouter = require("./routes/index");
+const adminRouter = require("./routes/admin.route");
+
 const fs = require('fs');
 const app = express();
 
@@ -32,6 +34,8 @@ app.use(
 );
 
 app.use("/", indexRouter);
+app.use("/api/v1", adminRouter);
+
 mongoose
   .connect(process.env.DATABASE, {
     dbName: "ALL4ONE_CARE_SERVICE",
@@ -39,7 +43,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    logger.info("MongoDB connected Successfully.");
+    console.log("MongoDB connected Successfully.");
   })
   .catch((err) => console.log(err.message));
 

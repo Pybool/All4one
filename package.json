@@ -17,12 +17,13 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "juice": "^10.0.0",
     "mongoose": "^7.0.3",
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.10"
+    "nodemailer": "^6.9.10",
+    "sharp": "^0.33.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"

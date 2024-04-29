@@ -1,0 +1,140 @@
+<style>
+    .spinner {
+        display: none;
+        width: 50px;
+        height: 50px;
+        border: 1px solid orange;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        border-top: 0px;
+        border-left: 0px;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<form id="accomodations-form">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-grp">
+                <input id="name" type="text" name="name" placeholder="Enter accomodation name" />
+                <i class="fal fa-user"></i>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-grp">
+                <input id="location" type="text" value="United Kingdom" name="location"
+                    placeholder="Enter accomodation location" />
+                <i class="fal fa-envelope"></i>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-grp">
+                <input id="images" type="file" multiple name="images" placeholder="Select accomodation images" />
+                <i class="fal fa-phone"></i>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-grp">
+                <textarea id="description" name="description" placeholder="Enter a description"></textarea>
+                <i class="fal fa-pencil"></i>
+            </div>
+        </div>
+    </div>
+    <div class="flex-row">
+        <div class="spinner"></div>
+        <button id="admin-submit" class="btn">submit</button>
+    </div>
+</form>
+<script>
+    const submitButton = document.getElementById('admin-submit');
+    submitButton.addEventListener('click', submitAccommodationForm);
+    try {
+        document
+            .getElementById("accomodations-form")
+            .addEventListener("submit", function (event) {
+                event.preventDefault();
+            });
+    } catch { }
+    function submitAccommodationForm(event) {
+        event.preventDefault();
+        const form = document.getElementById('accomodations-form');
+        const formData = new FormData(form);
+
+        // Field validation
+        let isValid = true;
+        const nameInput = document.getElementById('name');
+        const locationInput = document.getElementById('location');
+        const imagesInput = document.getElementById('images')//.files;
+        const description = document.getElementById('description').value;
+
+        const name = nameInput.value;
+        const location = locationInput.value;
+
+        // Validate name
+        if (name.trim() === '') {
+            isValid = false;
+            nameInput.classList.add('error'); // Add error class for styling
+        } else {
+            nameInput.classList.remove('error'); // Remove error class if fixed
+        }
+
+        // Validate location
+        if (location.trim() === '') {
+            isValid = false;
+            locationInput.classList.add('error');
+        } else {
+            locationInput.classList.remove('error');
+        }
+
+        // Validate image selection (optional)
+        if (imagesInput.files.length === 0) {
+            isValid = false;
+            // Add error indication for image selection (consider using a separate element)
+        }
+
+        // Handle file uploads (if needed)
+        console.log("imagesInput.files.length ", imagesInput.files.length)
+        if (isValid && imagesInput.files.length > 0) {
+
+            for (let i = 0; i < imagesInput.length; i++) {
+                formData.append('images', imagesInput[i]);
+            }
+            formData.append('data', JSON.stringify({ name, location, description }));
+        }
+
+
+        if (isValid) {
+            document.querySelector('.spinner').style.display = 'block';
+            fetch('/api/v1/create-accomodation', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('.spinner').style.display = 'none';
+                    // Handle successful form submission
+                    alert(data?.message);
+
+                    // You can display a success message, clear the form, etc. here
+                })
+                .catch(error => {
+                    alert('Error submitting form:', error);
+                    // Handle form submission error
+                });
+        } else {
+            // Display an error message to the user indicating required fields are missing
+            alert('Please fill in all required fields.');
+        }
+
+
+    }
+</script>

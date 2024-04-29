@@ -1,0 +1,112 @@
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@9.2.4/swiper-bundle.min.css">
+    <style>
+        /* Style the modal itself */
+        body.modal-open {
+        overflow: hidden;
+        }
+
+         .modal {
+            display: none;
+            /* Initially hidden */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100vh;
+            /* Full height */
+            overflow-y: hidden!important;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black background with transparency */
+        }
+
+        /* Modal content */
+        /* .modal-content {
+            background-color: rgb(0, 0, 0);
+            margin: 15% auto;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+            padding: 20px;
+            animation-name: fadeIn;
+            animation-duration: 0.4s;
+        } */
+
+        .modal-content {
+            background-color: rgb(0, 0, 0);
+            margin: 10% auto;
+            border: 1px solid #888;
+            width: 80%;
+            height: 80vh;
+            border-radius: 10px;
+            padding: 20px;
+            animation-name: fadeIn;
+            animation-duration: 0.4s;
+        }
+
+        .swiper-container-modal{
+            height:100%!important;
+        }
+
+        /* Close button inside the modal */
+        .closeBtn {
+            color: #fff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .closeBtn:hover,
+        .closeBtn:focus {
+            color:  rgba(0, 0, 255, 0.5);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Faded text for the cancel button (optional)  */
+        .closeBtn::after {
+            content: "\00d7";
+            /* Unicode character for "X" */
+        }
+
+        /* Animate the modal fade in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div id="simpleModal" class="modal show">
+        <div class="modal-content">
+            <span onclick="closeModal()" class="closeBtn"></span>
+            <!-- Swiper modal -->
+            <div id="swiper-container-modal" class="swiper-container-modal">
+                <%- include('../partials/carousel'); %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</body>
