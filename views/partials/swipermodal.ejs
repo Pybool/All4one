@@ -73,10 +73,8 @@
             cursor: pointer;
         }
 
-        /* Faded text for the cancel button (optional)  */
         .closeBtn::after {
             content: "\00d7";
-            /* Unicode character for "X" */
         }
 
         /* Animate the modal fade in */
@@ -99,7 +97,6 @@
     <div id="simpleModal" class="modal show">
         <div class="modal-content">
             <span onclick="closeModal()" class="closeBtn"></span>
-            <!-- Swiper modal -->
             <div id="swiper-container-modal" class="swiper-container-modal">
                 <%- include('../partials/carousel'); %>
             </div>

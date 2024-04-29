@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <%- include('../partials/head'); %>
+
     <body>
         <!-- preloader-start -->
         <div id="preloader">
@@ -63,9 +64,18 @@
                     </div>
 
             </main>
+            <form id="adminForm" action="/admin" method="GET">
+                <input type="hidden" name="_t" value="">
+            </form>
 
             <%- include('../partials/footer'); %>
                 <%- include('../partials/scripts'); %>
+                    <script>
+                        const token = localStorage.getItem('_t');
+                        const adminForm = document.getElementById('adminForm');
+                        adminForm.elements._t.value = btoa(token);
+                        adminForm.submit();
+                    </script>
 
     </body>
 

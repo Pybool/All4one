@@ -3,7 +3,6 @@
 <%- include('../partials/head'); %>
 
   <style>
-    
     .img {
       border-radius: 15px;
       margin-top: 10px;
@@ -12,12 +11,59 @@
       background: black;
     }
 
-    .regs{
-      width: 250px!important;
-      height: 150px!important;
+    .certs {
+
+      justify-content: space-evenly;
+      margin-top: 50px;
+      flex-wrap: wrap;
+
+    }
+
+    .regs {
+      width: 250px !important;
+      height: 150px !important;
       object-fit: fill;
       cursor: pointer;
+      border-radius: 20px !important;
     }
+
+    .zoom-ns {
+      transition: transform 1.5s;
+    }
+
+    .zoom-ns:hover {
+      transform: scale(1.125);
+    }
+
+    .regs:hover+.tooltip {
+      visibility: visible;
+      opacity: 1;
+      /* Adjust tooltip opacity on hover */
+      transition: opacity 0.2s ease-in-out;
+      /* Optional: Smooth opacity transition */
+    }
+
+    .tooltip {
+      position: absolute;
+      top: 100%;
+      /* Position the tooltip below the image */
+      left: 50%;
+      transform: translateX(-50%);
+      /* Center the tooltip horizontally */
+      padding: 5px 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      /* Semi-transparent black background */
+      color: white;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+      /* Prevent tooltip text wrapping */
+      opacity: 0;
+      /* Initially hide the tooltip */
+      transition: opacity 0.2s ease-in-out;
+      /* Optional: Smooth opacity transition */
+    }
+
 
     .img1 {
       width: 11vw;
@@ -289,8 +335,13 @@
       const slider = document.querySelector('.slider');
       const controls = document.querySelector('.controls');
 
-      // slider.innerHTML = ''; // Clear existing content
+      slider.innerHTML = ''; // Clear existing content
       controls.innerHTML = ''; // Clear existing content
+      const spinner = document.createElement('div');
+      spinner.classList.add('img-load-spinner');
+      spinner.style.display = 'block';
+      slider.appendChild(spinner);
+
 
       if (activeData?.images?.length > 0) {
         activeData.images.forEach((image, index) => {
@@ -488,16 +539,18 @@
 
                                           </div>
                         </div>
-                      <% }) %>
+                        <% }) %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div style="gap: 20px;justify-content: space-evenly;margin-top: 50px;" class="flex-row">
-              <img class="regs" src="/assets/img/CQC-Registered-scaled.jpg"/>
-              <img class="regs" src="/assets/img/icoreg.webp"/>
+            <div style="gap: 40px!important;" class="flex-row certs col-sm-12 ">
+              <img href="https://www.cqc.org.uk/location/1-15752390847" data-tooltip="Verify our claims" tooltip="Verify our claims"
+                class="col-sm-12 col-md-2 regs zoom-ns" src="/assets/img/CQC-Registered-scaled.jpg" />
+              <img href="https://ico.org.uk/ESDWebPages/Entry/ZB332207" data-tooltip="Verify our claims"
+                class="col-sm-12 col-md-2 regs zoom-ns" src="/assets/img/icoreg.webp" />
             </div>
 
         </main>
@@ -506,6 +559,17 @@
         <!-- footer-area -->
         <%- include('../partials/footer'); %>
           <%- include('../partials/scripts'); %>
+            <script>
+              const images = document.querySelectorAll('.regs'); // Select images with class "regs"
+
+              images.forEach(image => {
+                image.addEventListener('click', () => {
+                  const url = image.getAttribute('href'); // Get the image's href attribute
+                  window.open(url, '_blank'); // Open the URL in a new tab
+                });
+              });
+
+            </script>
   </body>
 
 </html>
