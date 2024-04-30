@@ -1,15 +1,121 @@
+<style>
+  .img {
+    border-radius: 15px;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+    background: black;
+  }
+
+  .certs {
+
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+
+  }
+
+  .regs {
+    width: 250px !important;
+    height: 150px !important;
+    object-fit: fill;
+    cursor: pointer;
+    border-radius: 20px !important;
+  }
+
+  .zoom-ns {
+    transition: transform 1.5s;
+  }
+
+  .zoom-ns:hover {
+    transform: scale(1.125);
+  }
+
+  .regs:hover+.tooltip {
+    visibility: visible;
+    opacity: 1;
+    /* Adjust tooltip opacity on hover */
+    transition: opacity 0.2s ease-in-out;
+    /* Optional: Smooth opacity transition */
+  }
+
+  .tooltip {
+    position: absolute;
+    top: 100%;
+    /* Position the tooltip below the image */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center the tooltip horizontally */
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Semi-transparent black background */
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    /* Prevent tooltip text wrapping */
+    opacity: 0;
+    /* Initially hide the tooltip */
+    transition: opacity 0.2s ease-in-out;
+    /* Optional: Smooth opacity transition */
+  }
+
+
+  .img1 {
+    width: 11vw;
+    height: 230px;
+  }
+
+  .img2 {
+    width: 11vw;
+    height: 80px;
+  }
+
+  .img4 {
+    width: 11vw;
+    height: 200px;
+    margin-top: 15px;
+  }
+
+  .img3 {
+    width: 11vw;
+    height: 80px;
+  }
+
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    .col-md-2 {
+        max-width: fit-content!important;
+    }
+}
+
+</style>
+
 <footer>
   <div class="footer-top-area gray-bg pt-30 pb-50">
     <div class="container">
+      <div style="gap: 40px!important;" class="flex-row certs col-sm-12 ">
+        <img href="https://www.cqc.org.uk/location/1-15752390847" data-tooltip="Verify our claims"
+          tooltip="Verify our claims" class="col-sm-12 col-md-2 regs zoom-ns"
+          src="/assets/img/CQC-Registered-scaled.jpg" />
+        <img href="https://ico.org.uk/ESDWebPages/Entry/ZB332207" data-tooltip="Verify our claims"
+          class="col-sm-12 col-md-2 regs zoom-ns" src="/assets/img/icoreg.webp" />
+      </div>
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-9">
           <div class="footer-widget mb-50">
             <div class="footer-logo mb-35">
-              <a href="/"
-                ><img
-                  src="/assets/img/images/horizonatal.png"
-                  alt=""
-              /></a>
+              <a href="/"><img src="/assets/img/images/horizonatal.png" alt="" /></a>
             </div>
             <div class="footer-text mb-35">
               <p>
@@ -70,46 +176,40 @@
               <ul>
                 <li>
                   <div class="fw-post-thumb">
-                    <a href="javascript:void(0)"
-                      ><img style="max-width:60px;max-height: 60px;" src="/assets/img/images/royaltyfree/contented-senior-patient-with-kind-doctor-nursing-home-time-together_496169-733.png" alt=""
-                    /></a>
+                    <a href="javascript:void(0)"><img style="max-width:60px;max-height: 60px;"
+                        src="/assets/img/images/royaltyfree/contented-senior-patient-with-kind-doctor-nursing-home-time-together_496169-733.png"
+                        alt="" /></a>
                   </div>
                   <div class="fw-post-content">
                     <span class="date">23rd february 2024</span>
                     <h4>
-                      <a href="javascript:void(0)"
-                        >Our news feeds are Coming soon</a
-                      >
+                      <a href="javascript:void(0)">Our news feeds are Coming soon</a>
                     </h4>
                   </div>
                 </li>
                 <li>
                   <div class="fw-post-thumb">
-                    <a href="javascript:void(0)"
-                      ><img style="max-width:60px;max-height: 60px;" src="/assets/img/images/royaltyfree/lean-elderly-person-being-taken-care-by-female-caretaker_23-2150216382.png" alt=""
-                    /></a>
+                    <a href="javascript:void(0)"><img style="max-width:60px;max-height: 60px;"
+                        src="/assets/img/images/royaltyfree/lean-elderly-person-being-taken-care-by-female-caretaker_23-2150216382.png"
+                        alt="" /></a>
                   </div>
                   <div class="fw-post-content">
                     <span class="date">23rd february 2024</span>
                     <h4>
-                      <a href="javascript:void(0)"
-                        >Our news feeds are Coming soon</a
-                      >
+                      <a href="javascript:void(0)">Our news feeds are Coming soon</a>
                     </h4>
                   </div>
                 </li>
                 <li>
                   <div class="fw-post-thumb">
-                    <a href="javascript:void(0)"
-                      ><img style="max-width:60px;max-height: 60px;" src="/assets/img/images/royaltyfree/social-worker-taking-care-senior-woman_23-2149031342.png" alt=""
-                    /></a>
+                    <a href="javascript:void(0)"><img style="max-width:60px;max-height: 60px;"
+                        src="/assets/img/images/royaltyfree/social-worker-taking-care-senior-woman_23-2149031342.png"
+                        alt="" /></a>
                   </div>
                   <div class="fw-post-content">
                     <span class="date">23rd february 2024</span>
                     <h4>
-                      <a href="javascript:void(0)"
-                        >Our news feeds are Coming soon</a
-                      >
+                      <a href="javascript:void(0)">Our news feeds are Coming soon</a>
                     </h4>
                   </div>
                 </li>
@@ -132,13 +232,8 @@
           <div class="copyright-right-wrap">
             <div class="copyright-form">
               <form id="newsletterForm" action="/api/v1/subscribe-newsletter" method="POST">
-                <input
-                  style="text-transform: lowercase;"
-                  id="newsletterInput"
-                  type="email"
-                  name="email"
-                  placeholder="enter email address"
-                />
+                <input style="text-transform: lowercase;" id="newsletterInput" type="email" name="email"
+                  placeholder="enter email address" />
                 <button onclick="subscribeNewsletter()" class="btn">Subscribe now</button>
               </form>
             </div>
