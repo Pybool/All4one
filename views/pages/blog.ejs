@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<%- include('../partials/head'); %>
+    <style>
+        .rc-post-thumb img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+    </style>
+
+    <body>
+        <!-- preloader-start -->
+        <div id="preloader">
+            <div id="loading-center">
+                <div id="loading-center-absolute">
+                    <div class="object" id="object_one"></div>
+                    <div class="object" id="object_two"></div>
+                    <div class="object" id="object_three"></div>
+                    <div class="object" id="object_four"></div>
+                </div>
+            </div>
+        </div>
+        <!-- preloader-end -->
+
+        <!-- header-area -->
+        <%- include('../partials/header'); %>
+            <!-- header-area-end -->
+
+            <!-- main-area -->
+            <main>
+                <%- include('../partials/cookiesperm'); %>
+                    <!-- breadcrumb-area -->
+                    <section class="breadcrumb-area">
+                        <div class="breadcrumb-bg"
+                            data-background="assets/img/images/royaltyfree/doctor-taking-care-senior-woman-home_23-2148962376.png">
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="breadcrumb-content">
+                                        <h2 class="title">all4One blog</h2>
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item">
+                                                    <a href="/">Home</a>
+                                                </li>
+                                                <li class="breadcrumb-item active" aria-current="page">
+                                                    blog
+                                                </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- breadcrumb-area-end -->
+
+                    <section class="blog-area pt-120 pb-120">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <% context.forEach(function(feed,index){ %>
+                                        <div class="blog--post--item mb-40">
+                                            <div class="blog--post--thumb">
+                                                <a href="/blog-details/<%= feed.id %>"><img src="<%= feed.img %>"
+                                                        alt="img"></a>
+                                            </div>
+                                            <div class="blog--post--content">
+                                                <div class="blog--tag">
+                                                    <a href="#">Care Service</a>
+                                                </div>
+                                                <h2><a href="/blog-details/<%= feed.id %>">
+                                                        <%= feed.title %>
+                                                    </a></h2>
+                                                <div class="blog--post--meta mb-20">
+                                                    <ul>
+                                                        <!-- <li><span><i class="far fa-eye"></i>232 Views</span></li> -->
+                                                        <!-- <li><a href="#"><i class="far fa-comments"></i>35 Comments</a></li> -->
+                                                        <li><span><i class="far fa-calendar-alt"></i>1st May,
+                                                                2024.</span></li>
+                                                    </ul>
+                                                </div>
+                                                <p>
+                                                    <%= feed.debrief %>
+                                                </p>
+                                                <div class="blog--post--bottom">
+                                                    <div class="blog--post--avatar">
+
+                                                        <div class="blog--avatar--info">
+                                                            <p>Source: <a href="#">
+                                                                    <%= feed.source %>
+                                                                </a></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blog--read--more">
+                                                        <a href="/blog-details/<%= feed.id %>"><i
+                                                                class="far fa-arrow-right"></i>Read More</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+
+                                            <!-- <div class="pagination-wrap">
+                        <ul>
+                            <li class="prv-next"><a href="#"><i class="fas fa-chevron-double-left"></i></a></li>
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">...</a></li>
+                            <li><a href="#">10</a></li>
+                            <li class="prv-right"><a href="#"><i class="fas fa-chevron-double-right"></i></a></li>
+                        </ul>
+                    </div> -->
+                                </div>
+                                <div class="col-lg-4 col-md-7">
+                                    <aside class="blog-sidebar pl-20">
+                                        <div class="widget mb-40">
+                                            <div class="sidebar-title mb-25">
+                                                <h3>Popular Feeds</h3>
+                                            </div>
+                                            <% context.reverse().forEach(function(feed,index){ %>
+                                                <div class="rc-post">
+                                                    <div class="rc-post-thumb">
+                                                        <a href="/blog-details/<%= feed.id %>"><img src="<%= feed.img %>" alt="img"></a>
+                                                    </div>
+                                                    <div class="rc-post-content">
+                                                        <h5><a href="/blog-details/<%= feed.id %>">
+                                                                <%= feed.title %>
+                                                            </a></h5>
+                                                        <div class="rc-post-date">
+                                                            <span><i class="far fa-calendar-alt"></i>1st May,
+                                                                2024.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }) %>
+
+                                        </div>
+                                        <div class="widget mb-40">
+                                            <div class="sidebar-title mb-25">
+                                                <h3>Categories</h3>
+                                            </div>
+                                            <div class="sidebar-cat">
+                                                <ul>
+                                                    <li><a href="#">Care Service <span>1</span></a></li>
+                                                    <li><a href="#">Dementia <span>2</span></a></li>
+                                                    <li><a href="#">Care Rights <span>1</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                       
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+            </main>
+            <!-- main-area-emd -->
+
+            <!-- footer-area -->
+            <%- include('../partials/footer'); %>
+                <!-- footer-area-end -->
+                <!-- JS here -->
+                <%- include('../partials/scripts'); %>
+    </body>
+
+    <!-- Mirrored from ifingerstudio.com/templates/wellpress-html/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Feb 2024 10:24:10 GMT -->
+
+</html>

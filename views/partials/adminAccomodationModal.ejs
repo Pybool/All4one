@@ -92,16 +92,17 @@
 </head>
 
 <body>
-    <div id="simpleModal" class="modal show">
+    <div id="admin-accomodation-modal" class="modal show">
         <div class="modal-content">
             <span onclick="closeModal()" class="closeBtn"></span>
             <div id="swiper-container-modal" class="swiper-container-modal">
-                <%- include('../partials/carousel'); %>
+                <%- include('../partials/adminAccomodationCarousel'); %>
+            </div>
+            <div class="flex-row-wrap">
+                <button class="btn" onclick="previousPicture()">Prev</button>
+                <button class="btn" onclick="bannerSwitcher()">Next</button>
+                <button style="background-color: red;" class="btn btn-danger" onclick="deleteAccomodationImage()">Delete</button>
             </div>
         </div>
     </div>
-
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
 </body>

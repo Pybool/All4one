@@ -126,22 +126,7 @@
                 Home Care Association (UKHCA).
               </p>
             </div>
-            <div class="footer-social">
-              <ul>
-                <li>
-                  <a href="https://www.facebook.com/all4onecare"><i class="fab fa-facebook-f"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fab fa-behance"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fab fa-youtube"></i></a>
-                </li>
-              </ul>
-            </div>
+       
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-9">
@@ -154,15 +139,13 @@
                 <li><a href="/">home</a></li>
                 <li><a href="/about-us">about us</a></li>
                 <li><a href="/services">services</a></li>
-                <li><a href="javascript:void(0)">news</a></li>
-                <li><a href="javascript:void(0)">terms & conditions</a></li>
-                <li><a href="/contact">contact</a></li>
+                <li><a href="/supported-living-accomodations">accomodations</a></li>
+                
               </ul>
               <ul>
-                <li><a href="javascript:void(0)">privacy policy</a></li>
-                <li><a href="javascript:void(0)">terms of use</a></li>
-                <li><a href="javascript:void(0)">copyright</a></li>
                 <li><a href="/careers">careers</a></li>
+                <li><a href="/blog">blogs</a></li>
+                <li><a href="/contact">contact</a></li>
               </ul>
             </div>
           </div>
@@ -174,45 +157,22 @@
             </div>
             <div class="fw-post">
               <ul>
-                <li>
-                  <div class="fw-post-thumb">
-                    <a href="javascript:void(0)"><img style="max-width:60px;max-height: 60px;"
-                        src="/assets/img/images/royaltyfree/contented-senior-patient-with-kind-doctor-nursing-home-time-together_496169-733.png"
-                        alt="" /></a>
-                  </div>
-                  <div class="fw-post-content">
-                    <span class="date">23rd february 2024</span>
-                    <h4>
-                      <a href="javascript:void(0)">Our news feeds are Coming soon</a>
-                    </h4>
-                  </div>
-                </li>
-                <li>
-                  <div class="fw-post-thumb">
-                    <a href="javascript:void(0)"><img style="max-width:60px;max-height: 60px;"
-                        src="/assets/img/images/royaltyfree/lean-elderly-person-being-taken-care-by-female-caretaker_23-2150216382.png"
-                        alt="" /></a>
-                  </div>
-                  <div class="fw-post-content">
-                    <span class="date">23rd february 2024</span>
-                    <h4>
-                      <a href="javascript:void(0)">Our news feeds are Coming soon</a>
-                    </h4>
-                  </div>
-                </li>
-                <li>
-                  <div class="fw-post-thumb">
-                    <a href="javascript:void(0)"><img style="max-width:60px;max-height: 60px;"
-                        src="/assets/img/images/royaltyfree/social-worker-taking-care-senior-woman_23-2149031342.png"
-                        alt="" /></a>
-                  </div>
-                  <div class="fw-post-content">
-                    <span class="date">23rd february 2024</span>
-                    <h4>
-                      <a href="javascript:void(0)">Our news feeds are Coming soon</a>
-                    </h4>
-                  </div>
-                </li>
+                <% minimalFeeds.forEach(function(minimalFeed,index) { %>
+                  <li>
+                    <div class="fw-post-thumb">
+                      <a href="/blog-details/<%= minimalFeed.id %>"><img style="max-width:60px;max-height: 60px;"
+                          src="<%= minimalFeed.img %>"
+                          alt="" /></a>
+                    </div>
+                    <div class="fw-post-content">
+                      <span class="date"><%= minimalFeed.date %></span>
+                      <h4>
+                        <a href="/blog-details/<%= minimalFeed.id %>"><%= minimalFeed.title %></a>
+                      </h4>
+                    </div>
+                  </li>
+                <% }) %>
+                
               </ul>
             </div>
           </div>
