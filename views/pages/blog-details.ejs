@@ -137,8 +137,8 @@
                                                         </li>
                                                         <li><span><i class="far fa-calendar-alt"></i><%= context.sections[0].date %></span>
                                                         </li>
-                                                        <li><a href="#"><i class="far fa-comments"></i>35 Comments</a>
-                                                        </li>
+                                                        <!-- <li><a href="#"><i class="far fa-comments"></i>35 Comments</a>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                                 <div style="<%= context.sections[0].imageAlign%>"
@@ -253,7 +253,7 @@
                                             <div class="blog-post-thumb position-relative">
                                                 <a href="/blog-details/<%= feed.id %>"><img class="related-blog-img" src="<%= feed.img %>"
                                                         alt=""></a>
-                                                <a href="#" class="overlay-post-tag">
+                                                <a href="/blog-details/<%= feed.id %>" class="overlay-post-tag">
                                                     <%= feed.caption %>
                                                 </a>
                                             </div>
