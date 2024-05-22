@@ -1,0 +1,76 @@
+<style>
+  .cookie-banner {
+    z-index: 9999;
+    max-height:50vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #eee;
+    border-radius: 5px;
+    border-color: 1px solid orange;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+  }
+
+  .text-left{
+    text-align: left;
+  }
+
+  .close {
+    height: 20px;
+    background-color: #777;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .b-text{
+    padding-left:30px;
+    padding-right:30px;
+    padding-top:30px;
+    max-width:90%
+  }
+
+  .flex-row-end{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap:10px;
+    flex-wrap: wrap;
+  }
+</style>
+
+<div class="cookie-banner" style="display: none">
+  <h6 class="text-left">This Website uses cookies</h6>
+  <p class="b-text">
+    We value your privacy and want you to understand how we collect, use, and
+    safeguard your personal information. Our website uses cookies, which are
+    small text files stored on your device, to enhance your browsing experience.
+    These cookies help us analyze website traffic, personalize content and ads,
+    and provide social media features.<br>
+    We may also share information about your use of our site with our social
+    media, advertising, and analytics partners, who may combine it with other
+    information that you’ve provided to them or that they’ve collected from your
+    use of their services.
+    <div class="flex-row-end b-text">
+        <div  style="padding-top:10px;">
+            By clicking "Allow Cookies" or continuing to use our website, you consent to
+            the use of cookies as described in our
+        <a href="’insert" link’> cookie policy</a>.
+        </div> 
+        <button class="btn btn-primary accept" id="accept-cookies-btn">
+            Allow Cookies
+          </button>
+    </div>
+  </p>
+
+ 
+</div>

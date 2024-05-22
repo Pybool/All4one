@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 80vw;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden; /* Ensures the container does not exceed viewport width */
+      }
+
+      .flex-row {
+        display: flex;
+        flex-direction: column; /* On smaller screens, switch to column layout */
+        gap: 20px;
+      }
+
+      header {
+        background-color: rgb(255, 165, 0);
+        color: #fff;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      h1 {
+        color: white;
+        margin: 0; /* Remove default margin */
+      }
+
+      p {
+        color: #666;
+        line-height: 1.6;
+        margin: 0; /* Remove default margin */
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: rgb(255, 165, 0);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #45a049;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        background-color: rgb(10, 23, 76);
+        color: #fff;
+        border-radius: 0 0 8px 8px;
+      }
+
+      /* Media query for smaller screens */
+      @media screen and (max-width: 600px) {
+        .container {
+          max-width: 90vw; /* Adjust container width for smaller screens */
+        }
+
+        .flex-row {
+          gap: 10px; /* Reduce gap between elements */
+        }
+
+        main {
+          padding: 15px; /* Adjust main padding */
+        }
+
+        h1 {
+          font-size: 1.5rem; /* Decrease heading font size */
+        }
+
+        p {
+          font-size: 0.9rem; /* Decrease paragraph font size */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <header>
+          <img
+            loading="lazy"
+            src="https://all4onecareservices.co.uk/assets/img/images/horizonatal.png"
+            srcSet="https://all4onecareservices.co.uk/assets/img/images/horizonatal.png"
+            style="width: 200px; height: 100px; object-fit: contain"
+            class="img"
+            alt="Logo"
+          />
+        </header>
+
+        <main>
+          <p style="padding: 30px">
+            Dear <%= emailOrName %>,<br /><br />
+
+            We hope this email finds you well.<br /><br />
+
+            We needed to take a moment to personally thank you for subscribing to
+            our newsletter. Your decision to join our community means a lot to
+            us, and we're thrilled to have you on board.<br /><br />
+
+            Our newsletter is designed to keep you updated with the latest news,
+            promotions, and exclusive content from All4One. We hope you find it
+            valuable and informative.<br /><br />
+
+            If you ever have any questions, feedback, or suggestions, please
+            don't hesitate to reach out. We're here to assist you and ensure
+            your experience with us is exceptional.<br /><br />
+
+            Once again, thank you for subscribing to our newsletter. We look
+            forward to staying connected with you!<br /><br />
+
+            Best regards,<br />
+
+            All4One Care Services<br />
+            Tel: +44 (0) 1708987738
+          </p>
+        </main>
+      </div>
+      <footer>© 2021-2024 All4One. All rights reserved.</footer>
+    </div>
+  </body>
+</html>
