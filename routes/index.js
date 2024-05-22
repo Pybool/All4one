@@ -43,63 +43,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get("/", (req, res, next) => {
-  res.render("pages/index", {
-    title: "All 4 Care Services Uk",
-    minimalFeeds
-  });
-});
-
-router.get("/blog", (req, res, next) => {
-  const { topic } = req.params;
-  const context = blogsData.blogs  
-  res.render("pages/blog", { pageTitle: context.title, context, minimalFeeds });
-});
-
-router.get("/blog-details/:topic", (req, res, next) => {
-  const { topic } = req.params;
-  const context = blogsData.blogs.find(obj => obj.id === topic);
-  const relatedFeeds = blogsData.relatedFeedsBuilder(context.related);  
-  res.render("pages/blog-details", { pageTitle: context.title, context, relatedFeeds, minimalFeeds });
-});
-
-router.get("/about-us", (req, res, next) => {
-  res.render("pages/about", { pageTitle: "About Us", content: "", minimalFeeds });
-});
-
-router.get("/services-details", (req, res, next) => {
-  res.render("pages/service-details", {
-    pageTitle: "Service Details",
-    servicesDetails: data.servicesDetails,
-    minimalFeeds
-  });
-});
-
-router.get("/services", async (req, res, next) => {
-  res.render("pages/services", { pageTitle: "Services", content: "", minimalFeeds });
-});
-
-router.get("/contact", (req, res, next) => {
-  res.render("pages/contact", { pageTitle: "contact Form", content: "", minimalFeeds });
-});
-
-router.get("/appointment", (req, res, next) => {
-  res.render("pages/appointment", {
-    pageTitle: "Appointment Form",
-    content: "",
-    minimalFeeds
-  });
-});
-
-router.get("/careers", (req, res, next) => {
-  res.render("pages/careers", { pageTitle: "Application Form", content: "", minimalFeeds });
-});
-
-router.get("/supported-living-accomodations", async (req, res, next) => {
-  const accomodations = await AccomodationService.getAccomodations();
-  res.render("pages/accomodations", {
-    pageTitle: "Supported Living Accomodations",
-    context: accomodations?.data,
-    minimalFeeds
+  res.send({
+    title: "All 4 Care Services BACKEND",
   });
 });
 
