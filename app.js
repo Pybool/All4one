@@ -10,13 +10,18 @@ const dotenv = require("dotenv");
 const debug = require("debug")("express");
 const indexRouter = require("./routes/index");
 const adminRouter = require("./routes/admin.route");
-
+const cors = require("cors");
 const fs = require('fs');
 const app = express();
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

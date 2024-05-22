@@ -92,7 +92,7 @@ const submitApplication = async (req, res) => {
     let exists = await Application.findOneAndUpdate({
       email: applicationData.email,
     });
-    if (exists.isComplete) {
+    if (exists && exists?.isComplete) {
       return res.send({
         status: false,
         message:
