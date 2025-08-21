@@ -54,9 +54,22 @@ const submitApplication = async (req, res) => {
         })
       : "unknown";
 
+    let exists = await JobApplication.findOne({
+      email: applicationData.email,
+      positionAppliedFor: slug,
+      isComplete: true,
+    });
+
+    if (exists) {
+      return {
+        status: false,
+        message: "You have already applied for this position",
+      };
+    }
+
     // === Upsert Application ===
     let dbApplication = await JobApplication.findOneAndUpdate(
-      { email: applicationData.email },
+      { email: applicationData.email, positionAppliedFor: slug },
       {
         $set: {
           email: applicationData.email,
@@ -115,7 +128,7 @@ const submitApplication = async (req, res) => {
 
 const fetchApplications = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;   // Default page = 1
+    const page = parseInt(req.query.page) || 1; // Default page = 1
     const limit = parseInt(req.query.limit) || 10; // Default limit = 10
     const skip = (page - 1) * limit;
 
@@ -142,5 +155,4 @@ const fetchApplications = async (req, res) => {
   }
 };
 
-
-module.exports = {submitApplication, fetchApplications};
+module.exports = { submitApplication, fetchApplications };
