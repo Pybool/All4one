@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const dotenv = require("dotenv");
 
 dotenv.config();
-console.log("\n\n\n\n\n===============> ",process.env.EMAIL_HOST)
+console.log("\n===============> ",process.env.EMAIL_HOST)
 let transporter;
 try {
   transporter = nodemailer.createTransport({

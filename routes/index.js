@@ -5,6 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const indexControllers = require("../controllers/index");
 const authControllers = require("../controllers/auth");
+const {submitApplication, fetchApplications} = require("../controllers/application");
 const blogsData = require("../models/blogs.mock");
 const AccomodationService = require("../services/accomodation.service");
 const auth = require("../services/auth");
@@ -52,7 +53,11 @@ router.post("/api/v1/contact-us", indexControllers.sendMessage);
 
 router.post("/api/v1/submit-application", indexControllers.submitApplication);
 
+router.post("/api/v1/job-application", submitApplication)
+
 router.get("/api/v1/fetch-application", indexControllers.getApplication);
+
+router.get("/api/v1/get-job-applications", fetchApplications);
 
 router.post(
   "/api/v1/subscribe-newsletter",
@@ -69,14 +74,11 @@ router.post("/api/v1/admin-register", authControllers.createAccount);
 
 router.post("/api/v1/admin-login", async (req, res, next) => {
   const auth = await authControllers.signIn(req, res, next);
+  console.log("auth ==> ",auth)
   if (auth.token) {
     return res.json({ pageTitle: "Login page", context: auth });
   }
-  return res.render("pages/login", { pageTitle: "Login page", context: null });
-});
-
-router.get("/login", async (req, res, next) => {
-  res.render("pages/login", { pageTitle: "Login page", context: null });
+  return res.json({ pageTitle: "Login page", context: auth });
 });
 
 
