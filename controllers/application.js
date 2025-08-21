@@ -61,10 +61,10 @@ const submitApplication = async (req, res) => {
     });
 
     if (exists) {
-      return {
+      return res.send({
         status: false,
         message: "You have already applied for this position",
-      };
+      });
     }
 
     // === Upsert Application ===
