@@ -6,7 +6,7 @@
     "dev": "nodemon app.js",
     "start": " node app.js"
   },
-  "type":"commonjs",
+  "type": "commonjs",
   "dependencies": {
     "apicache": "^1.6.3",
     "bcryptjs": "^2.4.3",
@@ -17,6 +17,7 @@
     "dotenv": "^16.0.3",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-rate-limit": "^8.0.1",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
