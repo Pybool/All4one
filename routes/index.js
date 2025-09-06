@@ -13,7 +13,7 @@ const {
   advocateSurveyForm,
   fetchAdvocateSurveys,
   holidayRequestForm,
-  holidayRequests
+  holidayRequests,
 } = require("../controllers/application");
 const blogsData = require("../models/blogs.mock");
 const AccomodationService = require("../services/accomodation.service");
@@ -21,6 +21,9 @@ const auth = require("../services/auth");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const router = express.Router();
+const axios = require("axios");
+const FormStatus = require("../models/formStatus");
+const {verifyToken, isAdmin, checkFormEnabled} = require('../services/middleware')
 
 const { generalLimiter, formLimiter } = require("./rateLimiter");
 
@@ -35,7 +38,6 @@ const footerFeeds = [
 
 const minimalFeeds = blogsData.relatedFeedsBuilder(footerFeeds);
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY; // Replace with your Secret Key
-
 
 function getCurrentDate() {
   const date = new Date();
@@ -56,25 +58,17 @@ const storage = multer.diskStorage({
   },
 });
 
-function verifyToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Expected format: "Bearer <token>"
-
-  if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
-  }
-
-  try {
-    const secret = process.env.JWT_SECRET || "some secret";
-    const decoded = jwt.verify(token, secret);
-    // Attach decoded payload to request so other routes can use it
-    req.user = decoded;
-    next();
-  } catch (err) {
-    console.error("Error verifying token:", err);
-    return res.status(403).json({ message: "Invalid or expired token." });
-  }
+/**
+ * Create a JWT token
+ * @param {Object} payload - The data you want to embed in the token (e.g. user info)
+ * @param {String} [expiresIn="1h"] - Expiration time (e.g. "1h", "7d")
+ * @returns {String} - The signed JWT
+ */
+function createToken(payload, expiresIn = "30s") {
+  const secret = process.env.JWT_SECRET || "some secret"; // use the same secret as in verifyToken
+  return jwt.sign(payload, secret, { expiresIn });
 }
+
 
 // Initialize multer upload middleware
 const upload = multer({ storage: storage });
@@ -87,28 +81,82 @@ router.get("/", generalLimiter, (req, res, next) => {
 
 router.post("/api/v1/contact-us", formLimiter, indexControllers.sendMessage);
 
-router.post("/api/v1/submit-application", formLimiter, verifyToken, indexControllers.submitApplication);
+router.post(
+  "/api/v1/submit-application",
+  formLimiter,
+  verifyToken,
+  indexControllers.submitApplication
+);
 
-router.post("/api/v1/job-application", formLimiter, verifyToken, submitApplication);
+router.post(
+  "/api/v1/job-application",
+  formLimiter,
+  verifyToken,
+  submitApplication
+);
 
-router.get("/api/v1/fetch-application", formLimiter, verifyToken, indexControllers.getApplication);
+router.get(
+  "/api/v1/fetch-application",
+  formLimiter,
+  verifyToken,
+  indexControllers.getApplication
+);
 
-router.get("/api/v1/get-job-applications", formLimiter, verifyToken, fetchApplications);
+router.get(
+  "/api/v1/get-job-applications",
+  generalLimiter,
+  isAdmin,
+  fetchApplications
+);
 
-router.get("/api/v1/get-job-references", formLimiter, verifyToken, fetchReferences);
+router.get(
+  "/api/v1/get-job-references",
+  generalLimiter,
+  isAdmin,
+  fetchReferences
+);
 
-router.get("/api/v1/get-advocate-surveys", formLimiter, verifyToken, fetchAdvocateSurveys);
+router.get(
+  "/api/v1/get-advocate-surveys",
+  generalLimiter,
+  isAdmin,
+  fetchAdvocateSurveys
+);
 
-router.get("/api/v1/get-holiday-requests", formLimiter, verifyToken, holidayRequests);
+router.get(
+  "/api/v1/get-holiday-requests",
+  generalLimiter,
+  isAdmin,
+  holidayRequests
+);
 
-router.post("/api/v1/recruitment-form", formLimiter, verifyToken, submitRecruitmentForm);
+router.post(
+  "/api/v1/recruitment-form",
+  formLimiter,
+  verifyToken,
+  submitRecruitmentForm
+);
 
-router.post("/api/v1/advocate-survey-form", formLimiter, verifyToken, advocateSurveyForm);
+router.post(
+  "/api/v1/advocate-survey-form",
+  formLimiter,
+  verifyToken,
+  advocateSurveyForm
+);
 
-router.post("/api/v1/holiday-request-form", formLimiter, verifyToken, holidayRequestForm);
+router.post(
+  "/api/v1/holiday-request-form",
+  formLimiter,
+  verifyToken,
+  holidayRequestForm
+);
 
-router.get("/api/v1/get-holiday-request", formLimiter, verifyToken, holidayRequests);
-
+router.get(
+  "/api/v1/get-holiday-request",
+  formLimiter,
+  verifyToken,
+  holidayRequests
+);
 
 router.post(
   "/api/v1/subscribe-newsletter",
@@ -123,7 +171,11 @@ router.post(
   indexControllers.appendApplicationSignature
 );
 
-router.post("/api/v1/admin-register", formLimiter, authControllers.createAccount);
+router.post(
+  "/api/v1/admin-register",
+  formLimiter,
+  authControllers.createAccount
+);
 
 router.post("/api/v1/admin-login", formLimiter, async (req, res, next) => {
   const auth = await authControllers.signIn(req, res, next);
@@ -163,18 +215,18 @@ router.get("/auth-admin", generalLimiter, async (req, res, next) => {
   }
 });
 
-
-
-router.post('/verify-recaptcha', async (req, res) => {
+router.post("/api/v1/verify-recaptcha", async (req, res) => {
   const { token } = req.body;
 
   if (!token) {
-    return res.status(400).json({ success: false, message: 'No token provided' });
+    return res
+      .status(400)
+      .json({ success: false, message: "No token provided" });
   }
 
   try {
     const response = await axios.post(
-      'https://www.google.com/recaptcha/api/siteverify',
+      "https://www.google.com/recaptcha/api/siteverify",
       null,
       {
         params: {
@@ -187,14 +239,61 @@ router.post('/verify-recaptcha', async (req, res) => {
     const data = response.data;
     if (data.success) {
       // reCAPTCHA verification successful
-      res.json({ success: true, message: 'reCAPTCHA successful' });
+      res.json({
+        success: true,
+        message: "reCAPTCHA successful",
+        token: createToken(req.body),
+      });
     } else {
       // reCAPTCHA verification failed
-      res.status(400).json({ success: false, message: 'reCAPTCHA failed', errors: data['error-codes'] });
+      res
+        .status(400)
+        .json({
+          success: false,
+          message: "reCAPTCHA failed",
+          errors: data["error-codes"],
+        });
     }
   } catch (error) {
-    console.error('reCAPTCHA verification error:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("reCAPTCHA verification error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+
+// Get all form statuses
+router.get("/api/v1/forms/status", async (req, res) => {
+  try {
+    const statuses = await FormStatus.find();
+    res.json(statuses);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching form statuses" });
+  }
+});
+
+// Get status for one form
+router.get("/api/v1/forms/status/:formKey", async (req, res) => {
+  try {
+    const form = await FormStatus.findOne({ formKey: req.params.formKey });
+    if (!form) return res.status(404).json({ message: "Form not found" });
+    res.json(form);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching form status" });
+  }
+});
+
+// Update/toggle form status
+router.post("/api/v1/forms/status/:formKey", async (req, res) => {
+  try {
+    const { enabled } = req.body;
+    const form = await FormStatus.findOneAndUpdate(
+      { formKey: req.params.formKey },
+      { enabled, updatedAt: new Date() },
+      { upsert: true, new: true }
+    );
+    res.json(form);
+  } catch (err) {
+    res.status(500).json({ message: "Error updating form status" });
   }
 });
 

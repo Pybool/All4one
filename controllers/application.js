@@ -1,12 +1,14 @@
 const JobApplication = require("../models/application.model.js");
 const RecruitmentReference = require("../models/recruitment-reference.model.js");
-const AdvocateSurvey =  require("../models/advocate-survey.model.js");
+const AdvocateSurvey = require("../models/advocate-survey.model.js");
 const HolidayRequest = require("../models/holiday-request.model.js");
 const slugify = require("slugify");
 const ejs = require("ejs");
 const juice = require("juice");
 const sendMail = require("../services/mailservice");
 const dotenv = require("dotenv");
+const {checkFormEnabled} = require('../services/middleware')
+
 
 dotenv.config();
 
@@ -23,6 +25,13 @@ function generateUniqueCode(prefix = "APP") {
 
 const submitApplication = async (req, res) => {
   try {
+    const allowed = await checkFormEnabled("job-applications");
+    if (!allowed) {
+      return res
+        .status(403)
+        .json({ message: "Submissions are closed for this form." });
+    }
+
     let response;
     let applicationData = req.body;
 
@@ -147,6 +156,12 @@ const fetchApplications = async (req, res) => {
 
 const submitRecruitmentForm = async (req, res) => {
   try {
+    const allowed = await checkFormEnabled("recruitment-references");
+    if (!allowed) {
+      return res
+        .status(403)
+        .json({ message: "Submissions are closed for this form." });
+    }
     let response;
     let recruitmentRef = req.body;
 
@@ -277,6 +292,12 @@ const fetchReferences = async (req, res) => {
 
 const advocateSurveyForm = async (req, res) => {
   try {
+    const allowed = await checkFormEnabled("advocate-surveys");
+    if (!allowed) {
+      return res
+        .status(403)
+        .json({ message: "Submissions are closed for this form." });
+    }
     let response;
     let survey = req.body;
     // === Upsert Application ===
@@ -329,6 +350,12 @@ const fetchAdvocateSurveys = async (req, res) => {
 
 const holidayRequestForm = async (req, res) => {
   try {
+    const allowed = await checkFormEnabled("holiday-requests");
+    if (!allowed) {
+      return res
+        .status(403)
+        .json({ message: "Submissions are closed for this form." });
+    }
     let response;
     let holidayRequestData = req.body;
     // === Upsert Application ===
@@ -387,5 +414,5 @@ module.exports = {
   advocateSurveyForm,
   fetchAdvocateSurveys,
   holidayRequestForm,
-  holidayRequests
+  holidayRequests,
 };

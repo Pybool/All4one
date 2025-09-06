@@ -23,6 +23,11 @@ function decodeToken(token) {
   }
 }
 
+async function getAdminRole(userId){
+  const user = await Account.findOne({_id: userId});
+  return user?.role || undefined
+}
+
 async function hashPassword(password) {
   const saltRounds = 10; // Adjust salt rounds as needed (higher for more security)
   const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -75,4 +80,4 @@ async function signIn(req) {
   }
 }
 
-module.exports = { generateToken, decodeToken, createAccount, signIn };
+module.exports = { generateToken, decodeToken, createAccount, signIn, getAdminRole };
