@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 13px; }
+    h2 { color: #283078; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    th { background-color: #e0e0e0; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Recruitment Reference Form</h1>
+
+  <h2>Company & Candidate Information</h2>
+  <table>
+    <tr><td>Company Name</td><td><%= data.companyName %></td></tr>
+    <tr><td>Address</td><td><%= data.address %></td></tr>
+    <tr><td>Telephone</td><td><%= data.tel %></td></tr>
+    <tr><td>Email</td><td><%= data.email %></td></tr>
+    <tr><td>Candidate Name</td><td><%= data.candidateName %></td></tr>
+    <tr><td>Position Applied For</td><td><%= payload.positionAppliedFor %></td></tr>
+    <tr><td>Referee Name</td><td><%= data.refereeName %></td></tr>
+  </table>
+
+  <h2>Employment Details</h2>
+  <table>
+    <tr><td>Position Held</td><td><%= data.positionHeld %></td></tr>
+    <tr><td>Start Date</td><td><%= data.employmentStartDate %></td></tr>
+    <tr><td>End Date</td><td><%= data.employmentEndDate %></td></tr>
+    <tr><td>Reason for Leaving</td><td><%= data.reasonForLeaving %></td></tr>
+    <tr><td>Capacity Known</td><td><%= data.capacityKnown %></td></tr>
+    <tr><td>Length of Acquaintance</td><td><%= data.lengthOfAcquaintance %></td></tr>
+  </table>
+
+  <h2>Performance & Behaviour</h2>
+  <table>
+    <tr><td>Performance Management</td><td><%= data.performanceManagement %></td></tr>
+    <tr><td>Details</td><td><%= data.performanceManagementDetails || '-' %></td></tr>
+    <tr><td>Would You Employ Again</td><td><%= data.wouldYouEmployAgain %></td></tr>
+    <tr><td>Details</td><td><%= data.employAgainDetails || '-' %></td></tr>
+    <tr><td>Dignity & Respect</td><td><%= data.dignityAndRespect %></td></tr>
+    <tr><td>Compassion & Empathy</td><td><%= data.compassionAndEmpathy %></td></tr>
+    <tr><td>Motivation & Commitment</td><td><%= data.motivationAndCommitment %></td></tr>
+    <tr><td>Learning & Development</td><td><%= data.learningAndDevelopment %></td></tr>
+    <tr><td>Team Working Ability</td><td><%= data.teamWorkingAbility %></td></tr>
+    <tr><td>Lone Working Ability</td><td><%= data.loneWorkingAbility %></td></tr>
+    <tr><td>Quality & Safety Compliance</td><td><%= data.qualityAndSafetyCompliance %></td></tr>
+    <tr><td>Overall Contribution</td><td><%= data.overallContribution %></td></tr>
+    <tr><td>Trustworthy</td><td><%= data.trustworthy %></td></tr>
+    <tr><td>Reliable in Duties</td><td><%= data.reliableInDuties %></td></tr>
+    <tr><td>Attendance Acceptable</td><td><%= data.attendanceAcceptable %></td></tr>
+    <tr><td>Suitable for Post</td><td><%= data.suitableForPost %></td></tr>
+  </table>
+
+  <h2>Additional Comments</h2>
+  <p><%= data.additionalComments || '-' %></p>
+
+  <h2>Declaration</h2>
+  <p>I, <%= data.refereeName %>, confirm that the information provided is correct.</p>
+  <p>Referee Signature: <%= data.refereeSignature %></p>
+  <p>Date Signed: <%= data.dateSigned %></p>
+</body>
+</html>

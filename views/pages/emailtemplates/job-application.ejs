@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 13px; }
+    h2 { color: #283078; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    th { background-color: #e0e0e0; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">All4One Job Application Form</h1>
+
+  <h2>Personal Details</h2>
+  <table>
+    <tr><td>Position Applied For</td><td><%= data.positionAppliedFor %></td></tr>
+    <tr><td>Name</td><td><%= data.firstName %> <%= data.surname %></td></tr>
+    <tr><td>Date of Birth</td><td><%= data.dateOfBirth %></td></tr>
+    <tr><td>Address</td><td><%= data.address1 %>, <%= data.address2 %>, <%= data.postcode %></td></tr>
+    <tr><td>Email</td><td><%= data.email %></td></tr>
+    <tr><td>Phone</td><td>Home: <%= data.homePhone %>, Mobile: <%= data.mobilePhone %></td></tr>
+    <tr><td>Emergency Contact</td><td><%= data.emergencyContact %></td></tr>
+  </table>
+
+  <h2>Driving & Availability</h2>
+  <table>
+    <tr><td>Driving Licence</td><td><%= data.hasDrivingLicence %></td></tr>
+    <tr><td>Endorsements</td><td><%= data.hasEndorsements %></td></tr>
+    <tr><td>Details</td><td><%= data.drivingDetails || '-' %></td></tr>
+    <tr><td>Availability Limits</td><td><%= data.hasAvailabilityLimits %></td></tr>
+    <tr><td>Details</td><td><%= data.availabilityLimitsDetails || '-' %></td></tr>
+    <tr><td>Restrictions</td><td><%= data.hasRestrictions %></td></tr>
+    <tr><td>Details</td><td><%= data.restrictionsDetails || '-' %></td></tr>
+    <tr><td>Willing to Work Overtime</td><td><%= data.willingOvertime %></td></tr>
+    <tr><td>Undesired Hours</td><td><%= data.undesiredHours %></td></tr>
+  </table>
+
+  <h2>Education</h2>
+  <table>
+    <tr><th>Institution/School</th><th>From</th><th>To</th><th>Courses</th></tr>
+    <% data.highSchool.forEach(s => { %>
+      <tr><td><%= s.school %></td><td><%= s.from %></td><td><%= s.to %></td><td><%= s.courses %></td></tr>
+    <% }) %>
+    <% data.college.forEach(c => { %>
+      <tr><td><%= c.institution %></td><td><%= c.from %></td><td><%= c.to %></td><td><%= c.courses %></td></tr>
+    <% }) %>
+  </table>
+
+  <h2>Further Training</h2>
+  <table>
+    <tr><th>Program</th><th>From</th><th>To</th><th>Qualification</th></tr>
+    <% data.furtherTraining.forEach(f => { %>
+      <tr><td><%= f.program %></td><td><%= f.from %></td><td><%= f.to %></td><td><%= f.qualification %></td></tr>
+    <% }) %>
+  </table>
+
+  <h2>Job Training</h2>
+  <table>
+    <tr><th>Organisation</th><th>Date</th><th>Subject</th></tr>
+    <% data.jobTraining.forEach(j => { %>
+      <tr><td><%= j.organisation %></td><td><%= j.date %></td><td><%= j.subject %></td></tr>
+    <% }) %>
+  </table>
+
+  <h2>Employment History</h2>
+  <table>
+    <tr><th>Employer</th><th>From</th><th>To</th><th>Duties</th><th>Reason for Leaving</th></tr>
+    <% data.employmentHistory.forEach(e => { %>
+      <tr><td><%= e.employer %></td><td><%= e.from %></td><td><%= e.to %></td><td><%= e.duties %></td><td><%= e.reasonForLeaving %></td></tr>
+    <% }) %>
+  </table>
+  <p><strong>Employment Gaps:</strong> <%= data.employmentGaps %></p>
+
+  <h2>Associations & Languages</h2>
+  <p><strong>Associations:</strong> <%= data.associations %></p>
+  <table>
+    <tr><th>Language</th><th>Level</th></tr>
+    <% data.languages.forEach(l => { %>
+      <tr><td><%= l.language %></td><td><%= l.level %></td></tr>
+    <% }) %>
+  </table>
+
+  <h2>Additional Information</h2>
+  <p><strong>Interests:</strong> <%= data.interests %></p>
+  <p><strong>Supplementary Info:</strong> <%= data.supplementaryInfo %></p>
+  <p><strong>Contact Current Employer:</strong> <%= data.contactCurrentEmployer %></p>
+  <p><strong>Source of Application:</strong> <%= data.sourceOfApplication %></p>
+
+  <h2>References</h2>
+  <table>
+    <tr><th>Name</th><th>Relationship</th><th>Email</th><th>Phone</th></tr>
+    <% data.references.forEach(r => { %>
+      <tr><td><%= r.name %></td><td><%= r.relationship %></td><td><%= r.email %></td><td><%= r.phone %></td></tr>
+    <% }) %>
+  </table>
+
+  <h2>Declaration</h2>
+  <p>I, <%= data.declaredFullName %>, declare that the information given in this application is true and complete.</p>
+  <p>Date: <%= data.declarationDate %></p>
+</body>
+</html>

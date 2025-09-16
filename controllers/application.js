@@ -7,8 +7,7 @@ const ejs = require("ejs");
 const juice = require("juice");
 const sendMail = require("../services/mailservice");
 const dotenv = require("dotenv");
-const {checkFormEnabled} = require('../services/middleware')
-
+const { checkFormEnabled } = require("../services/middleware");
 
 dotenv.config();
 
@@ -110,10 +109,13 @@ const submitApplication = async (req, res) => {
         html: juice(template),
       };
 
+
       sendMail(mailOptions)
         .then((resp) => console.log("Email sent:", resp))
         .catch((err) => console.error("Email error:", err));
     }
+
+    sendMailToAdmin("job-application", response)
 
     res.send(response);
   } catch (error) {
@@ -251,6 +253,8 @@ const submitRecruitmentForm = async (req, res) => {
         .catch((err) => console.error("Email error:", err));
     }
 
+    sendMailToAdmin("recruitment-reference", response)
+
     res.send(response);
   } catch (error) {
     console.error(error);
@@ -309,6 +313,7 @@ const advocateSurveyForm = async (req, res) => {
       data: advocateSurvey,
       message: "Survey has been submitted successfully, Thank you!",
     };
+    sendMailToAdmin("advocate-survey", response)
     res.send(response);
   } catch (error) {
     console.error(error);
@@ -367,6 +372,7 @@ const holidayRequestForm = async (req, res) => {
       data: holidayRequest,
       message: "Holiday request has been submitted successfully",
     };
+    sendMailToAdmin("holiday-request", response)
     res.send(response);
   } catch (error) {
     console.error(error);
@@ -404,6 +410,32 @@ const holidayRequests = async (req, res) => {
     console.error("Error fetching holiday requests:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
+};
+
+const sendMailToAdmin = async (topic, payload) => {
+  const paths = {
+    "job-application": "views/pages/emailtemplates/job-application.ejs",
+    "recruitment-reference":
+      "views/pages/emailtemplates/recruitment-reference.ejs",
+    "holiday-request": "views/pages/emailtemplates/holiday-request.ejs",
+    "advocate-survey": "views/pages/emailtemplates/advocate-survey.ejs",
+  };
+  const template = await ejs.renderFile(paths[topic], {
+    data: payload.data.data,
+    payload,
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_HOST_USER,
+    to: "info@all4onecareservices.co.uk",
+    subject: `${topic.replace("-", " ").toUpperCase()}`,
+    text: `${topic.replace("-", " ").toUpperCase()} submitted`,
+    html: juice(template),
+  };
+
+  sendMail(mailOptions)
+    .then((resp) => console.log("Email sent:", resp))
+    .catch((err) => console.error("Email error:", err));
 };
 
 module.exports = {
